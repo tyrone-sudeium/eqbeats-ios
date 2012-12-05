@@ -4,9 +4,9 @@ require 'motion/project'
 
 # require 'bundler'
 # Bundler.require
-# require 'bubble-wrap'
+require 'bubble-wrap'
 # require 'sugarcube'
-# require 'ib'
+require 'ib'
 require 'motion-cocoapods'
 
 Motion::Project::App.setup do |app|
@@ -22,7 +22,7 @@ Motion::Project::App.setup do |app|
   ]
 
   app.pods do
-    pod 'BlocksKit'
+    #pod 'BlocksKit'
     pod 'RestKit', '~>0.10.3'
   end
 end

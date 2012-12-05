@@ -9,7 +9,4 @@ class Track < EQBeats::ModelObject
     "#{@link}/art"
   end
 
-  def description
-    "<Track title:#{@title}>"
-  end
 end
