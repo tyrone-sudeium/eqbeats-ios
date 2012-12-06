@@ -18,7 +18,8 @@ Motion::Project::App.setup do |app|
     'SystemConfiguration',
     'MobileCoreServices',
     'Security',
-    'QuartzCore'
+    'QuartzCore',
+    'AVFoundation'
   ]
 
   app.pods do

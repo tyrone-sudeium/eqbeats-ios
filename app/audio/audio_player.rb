@@ -1,0 +1,3 @@
+class EQBeats::AudioPlayer
+  
+end
