@@ -29,8 +29,26 @@ module EQBeats
 
     end
 
+    # opts: :artist => artist name exactly
+    #       :track  => track name exactly
+    #       :query  => search string
+    #       If :query is provided, :artist and :track are ignored.
     def search_track(opts = {}, block)
-
+      if opts.is_a? String
+        query = opts
+      else
+        query = opts[:query]
+        artist = opts[:artist]
+        track = opts[:track]
+      end
+      if not query.nil?
+        query = query.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+        get "#{@base_url}/tracks/search/json?q=#{query}", track_mapping, block
+      elsif not artist.nil? and not track.nil?
+        artist = artist.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+        track = track.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+        get "#{@base_url}/tracks/search/exact/json?artist=#{artist}&track=#{track}", track_mapping, block
+      end
     end
 
     def get_latest_tracks(block)
@@ -51,6 +69,7 @@ module EQBeats
 
     protected
     def get(path, mapping, block)
+      p "performing get: #{path}"
       object_manager.loadObjectsAtResourcePath path, usingBlock: ->(loader) {
         loader.objectMapping = mapping
         loader.onDidLoadObjects = block
@@ -83,28 +102,58 @@ module EQBeats
     def user_mapping
       @user_mapping ||= begin
         mapping = RKObjectMapping.mappingForClass(User)
-        mapping.mapAttributesFromArray(['id', 'name', 
-          'html_description', 'link'])
-        mapping.mapKeyPath('description', toAttribute: 'detail')
+        set_user_mapping_attributes(mapping)
+        my_track_mapping = RKObjectMapping.mappingForClass(Track)
+        set_track_mapping_attributes(my_track_mapping)
+        my_playlist_mapping = RKObjectMapping.mappingForClass(Playlist)
+        set_playlist_mapping_attributes(my_playlist_mapping)
+        mapping.mapKeyPath('tracks', toRelationship:'tracks', withMapping:my_track_mapping)
+        mapping.mapKeyPath('playlists', toRelationship:'playlists', withMapping:my_playlist_mapping)
+        mapping
       end
     end
 
     def playlist_mapping
       @playlist_mapping ||= begin
         mapping = RKObjectMapping.mappingForClass(Playlist)
-        mapping.mapAttributesFromArray(['id', 'name', 
-          'html_description', 'link'])
-        mapping.mapKeyPath('description', toAttribute: 'detail')
+        set_playlist_mapping_attributes(mapping)
+        my_track_mapping = RKObjectMapping.mappingForClass(Track)
+        set_track_mapping_attributes(my_track_mapping)
+        my_user_mapping = RKObjectMapping.mappingForClass(User)
+        set_user_mapping_attributes(my_user_mapping)
+        mapping.mapKeyPath('tracks', toRelationship:'tracks', withMapping:my_track_mapping)
+        mapping.mapKeyPath('author', toRelationship:'author', withMapping:my_user_mapping)
+        mapping
       end
     end
 
     def track_mapping
       @track_mapping ||= begin
         mapping = RKObjectMapping.mappingForClass(Track)
-        mapping.mapAttributesFromArray(['id', 'title', 
-          'html_description', 'link,' 'download'])
-        mapping.mapKeyPath('description', toAttribute: 'detail')
+        set_track_mapping_attributes(mapping)
+        my_user_mapping = RKObjectMapping.mappingForClass(User)
+        set_user_mapping_attributes(my_user_mapping)
+        mapping.mapKeyPath('artist', toRelationship:'artist', withMapping:my_user_mapping)
+        mapping
       end
+    end
+
+    def set_user_mapping_attributes(mapping)
+      mapping.mapAttributesFromArray(['id', 'name', 
+        'html_description', 'link'])
+      mapping.mapKeyPath('description', toAttribute: 'detail')
+    end
+
+    def set_playlist_mapping_attributes(mapping)
+      mapping.mapAttributesFromArray(['id', 'name', 
+        'html_description', 'link'])
+      mapping.mapKeyPath('description', toAttribute: 'detail')
+    end
+
+    def set_track_mapping_attributes(mapping)
+      mapping.mapAttributesFromArray(['id', 'title', 
+        'html_description', 'link,' 'download'])
+      mapping.mapKeyPath('description', toAttribute: 'detail')
     end
 
   end

@@ -26,7 +26,7 @@ class LaunchBackgroundView < UIView
   attr_accessor :cell_size, :offscreen_cols, :offscreen_rows
 
   def cell_size
-    @cell_size ||= CGSizeMake(40,40)
+    @cell_size ||= CGSizeMake(60,60)
   end
 
   def offscreen_cols
@@ -103,7 +103,7 @@ class LaunchBackgroundView < UIView
 
   def move_columns
     @columns ||= []
-    UIView.animateWithDuration(1, 
+    UIView.animateWithDuration(1.5, 
       delay:0, 
       options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionCurveLinear, 
       animations: -> {

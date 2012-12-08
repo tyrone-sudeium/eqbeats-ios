@@ -32,7 +32,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Equestrian Beats" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ogI-PX-jh3">
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Equestrian Beats" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ogI-PX-jh3">
                                 <rect key="frame" x="20" y="108" width="280" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
@@ -55,13 +55,13 @@
                                     <segue destination="9vX-U1-fWx" kind="push" id="qnC-v5-4f1"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" clearButtonMode="always" id="gGi-2K-OKl">
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" clearButtonMode="always" id="gGi-2K-OKl">
                                 <rect key="frame" x="82" y="160" width="156" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="always" id="mmd-0P-iE7">
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="always" id="mmd-0P-iE7">
                                 <rect key="frame" x="82" y="198" width="156" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -121,7 +121,7 @@
                             <outlet property="delegate" destination="a2W-tQ-GKH" id="EIe-ie-HN2"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="YWy-of-X4B"/>
+                    <navigationItem key="navigationItem" title="Latest" id="YWy-of-X4B"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XIG-Cn-EaO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -135,15 +135,52 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" showsScopeBar="YES" id="n0c-DN-BRo">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <scopeButtonTitles>
+                                <string>Tracks</string>
+                                <string>Artists</string>
+                            </scopeButtonTitles>
+                            <connections>
+                                <outlet property="delegate" destination="xMV-H3-N6F" id="B6c-C6-1e7"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="rGf-Bd-sV3">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TrackCell" id="rGf-Bd-sV3" customClass="TrackCell">
+                                <rect key="frame" x="0.0" y="110" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="yTU-vk-xF1">
+                                            <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Track name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NWO-V3-Gxd">
+                                            <rect key="frame" x="52" y="0.0" width="248" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Artist name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="w56-h4-mlV">
+                                            <rect key="frame" x="52" y="23" width="248" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <connections>
+                                    <outlet property="artworkView" destination="yTU-vk-xF1" id="Qxp-Ga-MEH"/>
+                                    <outlet property="detailTitleLabel" destination="w56-h4-mlV" id="3y2-hQ-u41"/>
+                                    <outlet property="titleLabel" destination="NWO-V3-Gxd" id="veM-eQ-2FY"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -151,9 +188,21 @@
                             <outlet property="delegate" destination="xMV-H3-N6F" id="l64-9q-isc"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="XWD-ay-RAE"/>
+                    <navigationItem key="navigationItem" title="Search" id="XWD-ay-RAE"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="Vhg-hz-Tbt" id="9dq-x1-4Rd"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lrv-gN-OvG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="Vhg-hz-Tbt">
+                    <connections>
+                        <outlet property="delegate" destination="xMV-H3-N6F" id="vjx-F2-9Mb"/>
+                        <outlet property="searchBar" destination="n0c-DN-BRo" id="5iU-3t-BXQ"/>
+                        <outlet property="searchContentsController" destination="xMV-H3-N6F" id="x2Y-gv-KCv"/>
+                        <outlet property="searchResultsDataSource" destination="xMV-H3-N6F" id="rUV-Wo-iTX"/>
+                        <outlet property="searchResultsDelegate" destination="xMV-H3-N6F" id="HaR-J0-uRg"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1514" y="740"/>
         </scene>
@@ -181,17 +230,17 @@
                             <outlet property="delegate" destination="lkO-QZ-Tl5" id="IuB-fM-Yjl"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="CFc-EH-Rvw"/>
+                    <navigationItem key="navigationItem" title="Playlists" id="CFc-EH-Rvw"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YSM-mn-YHQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1514" y="70"/>
         </scene>
-        <!--Navigation Controller - Latest-->
+        <!--Navigation Controller-->
         <scene sceneID="P2H-zI-xuW">
             <objects>
                 <navigationController id="fKu-Yw-Y8l" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Latest" id="6It-Yh-zpZ"/>
+                    <tabBarItem key="tabBarItem" systemItem="featured" id="6It-Yh-zpZ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1l7-qp-d1j">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -225,11 +274,11 @@
             </objects>
             <point key="canvasLocation" x="988" y="70"/>
         </scene>
-        <!--Navigation Controller - Search-->
+        <!--Navigation Controller-->
         <scene sceneID="UTf-Ek-Rur">
             <objects>
                 <navigationController id="8yb-G4-MZA" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Search" id="81T-wP-B5a"/>
+                    <tabBarItem key="tabBarItem" systemItem="search" id="81T-wP-B5a"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="a1m-Hg-Keb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -249,9 +298,6 @@
         <class className="LatestViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LatestViewController.h"/>
         </class>
-        <class className="LaunchBackgroundView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LaunchBackgroundView.h"/>
-        </class>
         <class className="LaunchViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LaunchViewController.h"/>
             <relationships>
@@ -267,8 +313,19 @@
         <class className="PlaylistsViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PlaylistsViewController.h"/>
         </class>
-        <class className="SearchViewController" superclassName="UITableViewController">
+        <class className="SearchViewController" superclassName="TracksViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SearchViewController.h"/>
+        </class>
+        <class className="TrackCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TrackCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="artworkView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="detailTitleLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="TracksViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TracksViewController.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

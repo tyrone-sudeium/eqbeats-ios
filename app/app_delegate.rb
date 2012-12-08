@@ -6,6 +6,9 @@ class AppDelegate
     rootVC = storyboard.instantiateInitialViewController
     @window.rootViewController = rootVC
     @window.makeKeyAndVisible
+
+    setup_appearance
+
     true
   end
 
@@ -15,5 +18,9 @@ class AppDelegate
 
   def audio_player
     @audio_player ||= EQBeats::AudioPlayer.new
+  end
+
+  def setup_appearance
+    UINavigationBar.appearance.titleTextAttributes = { UITextAttributeFont => UIFont.fontWithName('mplus-1c-bold', size: 18) }
   end
 end
