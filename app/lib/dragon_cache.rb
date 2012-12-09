@@ -23,7 +23,12 @@ class DragonCache
   def cache_asset(image, forString: string)
     @memory_cache.setObject(asset, forKey: string, cost: image.memory_cost)
     EM.schedule {
-
+      data = UIImagePNGRepresentation(image)
+      error = Pointer.new(:object)
+      data.writeToFile(asset_path(string), options: NSDataWritingAtomic, error: error)
+      unless error.nil?
+        p error[0]
+      end
     }
   end
 
