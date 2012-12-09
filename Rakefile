@@ -5,6 +5,7 @@ require 'motion/project'
 # require 'bundler'
 # Bundler.require
 require 'bubble-wrap'
+require 'bubble-wrap/reactor'
 # require 'sugarcube'
 require 'ib'
 require 'motion-cocoapods'

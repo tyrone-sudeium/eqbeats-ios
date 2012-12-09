@@ -11,17 +11,17 @@ class DragonCache
   attr_accessor :memory_cache
 
   def initialize(cache_dir = 'dragon')
-    @cache_dir = cache_dir
+    @hoard = cache_dir
     @memory_cache = NSCache.alloc.init
     @memory_cache.setTotalCostLimit(MAXIMUM_MEMORY_USAGE)
   end
 
   def dragon_path
-    "#{App.cache_path}/#{@cache_dir}"
+    "#{App.cache_path}/#{@hoard}"
   end
 
   def cache_asset(image, forString: string)
-    @memory_cache.setObject(asset, forKey: string, cost: image.memory_cost)
+    @memory_cache.setObject(image, forKey: string, cost: image.memory_cost)
     EM.schedule {
       data = UIImagePNGRepresentation(image)
       error = Pointer.new(:object)
@@ -50,7 +50,7 @@ class DragonCache
     unless Dir.exists? dragon_path
       Dir.mkdir(dragon_path)
     end
-    hash = string.dataUsingEncoding(NSUTF8StringEncoding)
+    hash = string.dataUsingEncoding(NSUTF8StringEncoding).MD5
     "#{dragon_path}/#{hash}"
   end
 

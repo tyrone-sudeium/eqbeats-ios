@@ -14,13 +14,14 @@ class Track < EQBeats::ModelObject
   def art_link(quality = :full)
     case quality
     when :full
-      "#{@link}/art"
+      "#{self.link}/art"
     when :medium
-      "#{@link}/art/medium"
+      "#{self.link}/art/medium"
     when :thumb
-      "#{@link}/art/thumb"
+      "#{self.link}/art/thumb"
+    else
+      "#{self.link}/art"
     end
-    "#{@link}/art"
   end
 
   def cache_path

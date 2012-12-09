@@ -49,7 +49,6 @@ class SearchViewController < UITableViewController
     reloadData
     case searchBar.selectedScopeButtonIndex
     when 0
-      p 'performing search'
       App.delegate.api.search_track "#{searchBar.text}", -> results {
         if results.is_a? NSArray
           @search_results = results
@@ -74,6 +73,7 @@ class SearchViewController < UITableViewController
     track = @search_results[indexPath.row]
     cell.titleLabel.text = track.title
     cell.detailTitleLabel.text = track.artist.name
+    cell.artworkView.load_image_from_url(track.art_link(:thumb))
     cell
   end
 

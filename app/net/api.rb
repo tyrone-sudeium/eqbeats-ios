@@ -152,7 +152,7 @@ module EQBeats
 
     def set_track_mapping_attributes(mapping)
       mapping.mapAttributesFromArray(['id', 'title', 
-        'html_description', 'link,' 'download'])
+        'html_description', 'link', 'download'])
       mapping.mapKeyPath('description', toAttribute: 'detail')
     end
 

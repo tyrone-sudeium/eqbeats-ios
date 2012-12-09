@@ -1,4 +1,5 @@
 module BubbleWrap::App
+  module_function
 
   def application_support_path
     app_support = library_path.stringByAppendingPathComponent 'Application Support'

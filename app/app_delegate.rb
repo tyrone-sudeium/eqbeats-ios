@@ -1,5 +1,5 @@
 class AppDelegate
-  attr_accessor :api, :audio_player
+  attr_accessor :api, :audio_player, :cache
   def application(application, didFinishLaunchingWithOptions:launchOptions)
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
     storyboard = UIStoryboard.storyboardWithName('MainStoryboard', bundle: nil)
@@ -18,6 +18,10 @@ class AppDelegate
 
   def audio_player
     @audio_player ||= EQBeats::AudioPlayer.new
+  end
+
+  def cache
+    @cache ||= DragonCache.new
   end
 
   def setup_appearance
