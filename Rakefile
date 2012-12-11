@@ -26,5 +26,6 @@ Motion::Project::App.setup do |app|
   app.pods do
     #pod 'BlocksKit'
     pod 'RestKit', '~>0.10.3'
+    pod 'SDWebImage', '>= 3.0'
   end
 end

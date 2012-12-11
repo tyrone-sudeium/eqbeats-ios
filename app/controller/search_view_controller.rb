@@ -73,7 +73,7 @@ class SearchViewController < UITableViewController
     track = @search_results[indexPath.row]
     cell.titleLabel.text = track.title
     cell.detailTitleLabel.text = track.artist.name
-    cell.artworkView.load_image_from_url(track.art_link(:thumb))
+    cell.artworkView.setImageWithURL(NSURL.URLWithString(track.art_link(:thumb)))
     cell
   end
 

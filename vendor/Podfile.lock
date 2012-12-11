@@ -27,12 +27,16 @@ PODS:
   - JSONKit (>= 1.5pre)
   - RestKit/Network
 - RestKit/UI (0.10.3)
+- SDWebImage (3.0):
+  - SDWebImage/Main (= 3.0)
+- SDWebImage/Main (3.0)
 - SOCKit (1.1)
 - cocoa-oauth (0.0.1):
   - NSData+Base64 (~> 1.0)
 
 DEPENDENCIES:
 - RestKit (~> 0.10.3)
+- SDWebImage (>= 3.0)
 
 SPEC CHECKSUMS:
   FileMD5Hash: c3b015e6fb293eea0a0c276747f61f20408c2644
@@ -47,6 +51,8 @@ SPEC CHECKSUMS:
   RestKit/ObjectMapping/CoreData: 1fb57eb941d7d2587648491507a0bcaeb70b67f2
   RestKit/ObjectMapping/JSON: 1fb57eb941d7d2587648491507a0bcaeb70b67f2
   RestKit/UI: 1fb57eb941d7d2587648491507a0bcaeb70b67f2
+  SDWebImage: afa3965bcb37797ba4ecac49393897b99d1b4be7
+  SDWebImage/Main: afa3965bcb37797ba4ecac49393897b99d1b4be7
   SOCKit: 179515c1a621dd5652a60e9be02ea4adcd25bc9b
   cocoa-oauth: 8f4c8b77c77ac660de37f8125557c4ec09b0118a
 
