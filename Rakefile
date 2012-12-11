@@ -22,7 +22,8 @@ Motion::Project::App.setup do |app|
     'QuartzCore',
     'AVFoundation'
   ]
-
+  app.device_family = [:iphone, :ipad]
+  app.prerendered_icon = true
   app.pods do
     #pod 'BlocksKit'
     pod 'RestKit', '~>0.10.3'
