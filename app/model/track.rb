@@ -7,7 +7,7 @@ class Track < EQBeats::ModelObject
   end
 
   def mp3
-    @download[:mp3]
+    self.download[:mp3]
   end
 
   # quality, :thumb, :medium, :full
