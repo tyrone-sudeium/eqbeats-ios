@@ -11,8 +11,12 @@ class SearchViewController < UITableViewController
     super
     @@track_cell_nib ||= UINib.nibWithNibName('TrackCell', bundle: NSBundle.mainBundle)
     self.tableView.registerNib(@@track_cell_nib, forCellReuseIdentifier:'TrackCell')
-    self.searchBar.text_field.font = Theme.normal_font_at_size(14)
+    #self.searchBar.text_field.font = Theme.normal_font_at_size(13)
     reloadData
+  end
+
+  def viewDidAppear(animated)
+    super
   end
 
   def reloadData
@@ -76,6 +80,10 @@ class SearchViewController < UITableViewController
   def tableView(tableView, cellForRowAtIndexPath: indexPath)
     cell = tableView.dequeueReusableCellWithIdentifier('TrackCell')
     track = @search_results[indexPath.row]
+    # Theming
+    cell.titleLabel.font = Theme.adjust_font_face(cell.titleLabel.font)
+    cell.detailTitleLabel.font = Theme.adjust_font_face(cell.detailTitleLabel.font)
+
     cell.titleLabel.text = track.title
     cell.detailTitleLabel.text = track.artist.name
     cell.artworkView.setImageWithURL(NSURL.URLWithString(track.art_link(:thumb)))
