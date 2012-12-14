@@ -86,6 +86,7 @@
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.091979874119999999" green="0.060623101560000003" blue="0.2048642792" alpha="1" colorSpace="deviceRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="fKu-Yw-Y8l" kind="relationship" relationship="viewControllers" id="Q2I-iO-a0a"/>
@@ -122,7 +123,7 @@
                             <outlet property="delegate" destination="a2W-tQ-GKH" id="EIe-ie-HN2"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Latest" id="YWy-of-X4B"/>
+                    <navigationItem key="navigationItem" title="Featured" id="YWy-of-X4B"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XIG-Cn-EaO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -139,6 +140,7 @@
                         <searchBar key="tableHeaderView" contentMode="redraw" showsScopeBar="YES" id="n0c-DN-BRo">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <color key="tintColor" red="0.091979874119999999" green="0.060623101560000003" blue="0.2048642792" alpha="1" colorSpace="deviceRGB"/>
                             <textInputTraits key="textInputTraits"/>
                             <scopeButtonTitles>
                                 <string>Tracks</string>

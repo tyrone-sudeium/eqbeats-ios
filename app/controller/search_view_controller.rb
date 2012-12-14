@@ -3,10 +3,15 @@ class SearchViewController < UITableViewController
 
   attr_accessor :search_results
 
+  def viewDidLoad
+    super
+  end
+
   def viewWillAppear(animated)
     super
     @@track_cell_nib ||= UINib.nibWithNibName('TrackCell', bundle: NSBundle.mainBundle)
     self.tableView.registerNib(@@track_cell_nib, forCellReuseIdentifier:'TrackCell')
+    self.searchBar.text_field.font = Theme.normal_font_at_size(14)
     reloadData
   end
 

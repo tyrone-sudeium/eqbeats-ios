@@ -25,6 +25,13 @@ class AppDelegate
   end
 
   def setup_appearance
-    UINavigationBar.appearance.titleTextAttributes = { UITextAttributeFont => UIFont.fontWithName('mplus-1c-bold', size: 18) }
+    bold_font_19 = Theme.bold_font_at_size 19
+    bold_font_14 = Theme.bold_font_at_size 14
+    font_14 = Theme.normal_font_at_size 14
+    UINavigationBar.appearance.titleTextAttributes = { 
+      UITextAttributeFont => bold_font_19,
+      UITextAttributeTextColor => BW.rgb_color(224, 216, 255) 
+    }
+    UINavigationBar.appearance.tintColor = BW.rgb_color(23, 15, 52)
   end
 end
