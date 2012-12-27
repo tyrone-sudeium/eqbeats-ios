@@ -1,8 +1,8 @@
 class Track < EQBeats::ModelObject
-  attr_accessor :title, :artist, :download
+  attr_accessor :title, :artist, :download, :player_item
 
-  def file_path
-    return mp3 unless File.exists? cache_path
+  def asset_url
+    return NSURL.URLWithString(mp3) unless cached?
     NSURL.fileURLWithPath(cache_path).absoluteString
   end
 
@@ -26,6 +26,15 @@ class Track < EQBeats::ModelObject
 
   def cache_path
     "#{App.cache_path}/track_#{id}.mp3"
+  end
+
+  def cached?
+    File.exists? cache_path
+  end
+
+  def player_item
+    @player_item ||= AVPlayerItem.playerItemWithURL file_path
+    @player_item
   end
 
 end

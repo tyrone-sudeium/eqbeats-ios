@@ -90,4 +90,10 @@ class SearchViewController < UITableViewController
     cell
   end
 
+  def tableView(tableView, didSelectRowAtIndexPath: indexPath)
+    track = @search_results[indexPath.row]
+    AudioPlayer.playback_queue = [track]
+    AudioPlayer.play
+  end
+
 end

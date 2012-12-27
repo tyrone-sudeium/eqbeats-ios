@@ -22,8 +22,25 @@ class TestView < UIView
 
 end
 
+class BackgroundTileImageView < UIImageView
+  def desiredHeight
+    self.frame.size.height
+  end
+
+  def desiredWidth
+    self.frame.size.width
+  end
+end
+
 class LaunchBackgroundView < UIView
   attr_accessor :cell_size, :offscreen_cols, :offscreen_rows
+
+  def on(sym, block)
+    case sym
+    when :image_needed
+      self.on_image_needed = block
+    end
+  end
 
   def cell_size
     @cell_size ||= CGSizeMake(60,60)
@@ -67,8 +84,11 @@ class LaunchBackgroundView < UIView
     needed_columns.times do
       view = VerticalLayoutView.alloc.initWithFrame([[0,0],column_size])
       rows_per_col.times do
-        cell = TestView.alloc.initWithFrame([[0,0],cell_size])
+        cell = BackgroundTileImageView.alloc.initWithFrame([[0,0],cell_size])
         cell.backgroundColor = 'white'.to_color
+        unless self.on_image_needed.nil?
+          cell.image = self.on_image_needed.call
+        end
         view.addSubview(cell)
       end
       @layout_view.addSubview(view)
@@ -103,7 +123,7 @@ class LaunchBackgroundView < UIView
 
   def move_columns
     @columns ||= []
-    UIView.animateWithDuration(1.5, 
+    UIView.animateWithDuration(2.5, 
       delay:0, 
       options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionCurveLinear, 
       animations: -> {
@@ -130,5 +150,8 @@ class LaunchBackgroundView < UIView
     end
     @columns.rotate!(3)
   end
+
+  protected
+  attr_accessor :on_image_needed
 
 end
