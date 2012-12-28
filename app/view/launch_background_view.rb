@@ -43,15 +43,15 @@ class LaunchBackgroundView < UIView
   end
 
   def cell_size
-    @cell_size ||= CGSizeMake(60,60)
+    @cell_size ||= CGSizeMake(90,90)
   end
 
   def offscreen_cols
-    @offscreen_cols ||= 3
+    @offscreen_cols ||= 1
   end
 
   def offscreen_rows
-    @offscreen_rows ||= 3
+    @offscreen_rows ||= 1
   end
 
   def column_size
@@ -74,7 +74,14 @@ class LaunchBackgroundView < UIView
       transform = CATransform3DIdentity
       transform.m34 = 1.0 / -500
       transform = CATransform3DRotate(transform, -0.3, 0.0, 1.0, 0.0)
-      v.layer.transform = transform
+      UIView.animateWithDuration(3.0, 
+        delay:0, 
+        options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionCurveEaseInOut, 
+        animations: -> {
+          v.layer.transform = transform
+        }, 
+        completion: nil
+      )
       v
     end
     @columns ||= []
@@ -84,8 +91,9 @@ class LaunchBackgroundView < UIView
     needed_columns.times do
       view = VerticalLayoutView.alloc.initWithFrame([[0,0],column_size])
       rows_per_col.times do
-        cell = BackgroundTileImageView.alloc.initWithFrame([[0,0],cell_size])
+        cell = BackgroundTileImageView.alloc.initWithFrame([[0,0],[cell_size.width+1,cell_size.height+1]])
         cell.backgroundColor = 'white'.to_color
+        cell.layer.edgeAntialiasingMask = KCALayerBottomEdge | KCALayerTopEdge
         unless self.on_image_needed.nil?
           cell.image = self.on_image_needed.call
         end
@@ -123,7 +131,7 @@ class LaunchBackgroundView < UIView
 
   def move_columns
     @columns ||= []
-    UIView.animateWithDuration(2.5, 
+    UIView.animateWithDuration(3.5, 
       delay:0, 
       options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionCurveLinear, 
       animations: -> {
@@ -143,12 +151,12 @@ class LaunchBackgroundView < UIView
   end
 
   def rotate_columns
-    @columns.take(3).each do |view|
+    @columns.take(offscreen_cols).each do |view|
       f = view.frame
       f.origin.x += cell_size.width * @columns.count
       view.frame = f
     end
-    @columns.rotate!(3)
+    @columns.rotate!(offscreen_cols)
   end
 
   protected

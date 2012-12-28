@@ -15,3 +15,5 @@ ui.xcodeproj
 ib.xcodeproj
 vendor/Pods
 .dat*.*
+
+/scripts/artwork/

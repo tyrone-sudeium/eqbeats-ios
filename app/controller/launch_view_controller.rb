@@ -8,9 +8,8 @@ class LaunchViewController < UIViewController
     self.navigationController.setNavigationBarHidden(true, animated: animated)
     self.launch_background.on :image_needed, -> do
       @@count ||= 0
-      @@count = (@@count + 1) % 175
-      p "albumart/#{@@count}.png"
-      UIImage.imageNamed("albumart/#{@@count}.png")
+      @@count = (@@count + 1) % 35
+      UIImage.imageNamed("albumart/#{@@count}.jpg")
     end
   end
 end
