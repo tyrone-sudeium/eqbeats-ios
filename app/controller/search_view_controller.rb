@@ -94,6 +94,8 @@ class SearchViewController < UITableViewController
     track = @search_results[indexPath.row]
     AudioPlayer.playback_queue = [track]
     AudioPlayer.play
+    player = self.storyboard.instantiateViewControllerWithIdentifier('NowPlaying')
+    App.delegate.navigation_controller.pushViewController(player, animated:true)
   end
 
 end

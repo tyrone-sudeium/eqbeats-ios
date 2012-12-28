@@ -3,6 +3,12 @@ class LaunchViewController < UIViewController
 
   outlet :launch_background, LaunchBackgroundView
 
+  def viewDidLoad
+    self.view.when_tapped do
+      self.performSegueWithIdentifier('PushToTabBarController', sender:self)
+    end
+  end
+
   def viewWillAppear(animated)
     super
     self.navigationController.setNavigationBarHidden(true, animated: animated)

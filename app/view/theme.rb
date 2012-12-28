@@ -1,6 +1,8 @@
 module EQBeats::Theme
   module_function
 
+  # # # Fonts # # #
+
   FONT_FACE = 'mplus-2c-regular'
   BOLD_FONT_FACE = 'mplus-2c-bold'
   SUPER_BOLD_FONT_FACE = 'mplus-2c-black'
@@ -24,6 +26,16 @@ module EQBeats::Theme
     else
       UIFont.fontWithName(FONT_FACE, size: font.pointSize)
     end
+  end
+
+  # # # Icons, Buttons, Stretchable Things # # #
+
+  def black_back_button_image
+    UIImage.imageNamed('BackButton.png').stretchableImageWithLeftCapWidth(14, topCapHeight:0)
+  end
+
+  def black_back_button_highlighted_image
+    UIImage.imageNamed('BackButtonHighlighted.png').stretchableImageWithLeftCapWidth(14, topCapHeight:0)
   end
 
 end

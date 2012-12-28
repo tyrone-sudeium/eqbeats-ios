@@ -7,10 +7,11 @@ module EQBeats::AudioPlayer
   def playback_queue=(queue)
     @playback_queue = queue
     self.queue_items = player_items_from_tracks(queue)
-    self.player.removeAllItems
-    self.queue_items.each do |item|
-      self.player.insertItem(item, afterItem:nil)
-    end
+    self.player = nil
+    # self.player.removeAllItems
+    # self.queue_items.each do |item|
+    #   self.player.insertItem(item, afterItem:nil)
+    # end
   end
 
   def player

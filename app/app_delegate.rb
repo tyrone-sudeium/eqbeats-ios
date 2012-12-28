@@ -1,9 +1,10 @@
 class AppDelegate
-  attr_accessor :api, :audio_player, :cache
+  attr_accessor :api, :audio_player, :cache, :navigation_controller
   def application(application, didFinishLaunchingWithOptions:launchOptions)
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
     storyboard = UIStoryboard.storyboardWithName('MainStoryboard', bundle: nil)
     rootVC = storyboard.instantiateInitialViewController
+    self.navigation_controller = rootVC
     @window.rootViewController = rootVC
     @window.makeKeyAndVisible
 
