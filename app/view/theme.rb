@@ -3,6 +3,7 @@ module EQBeats::Theme
 
   FONT_FACE = 'mplus-2c-regular'
   BOLD_FONT_FACE = 'mplus-2c-bold'
+  SUPER_BOLD_FONT_FACE = 'mplus-2c-black'
 
   def normal_font_at_size(size)
     UIFont.fontWithName(FONT_FACE, size: size)
@@ -10,6 +11,10 @@ module EQBeats::Theme
 
   def bold_font_at_size(size)
     UIFont.fontWithName(BOLD_FONT_FACE, size: size)
+  end
+
+  def super_bold_font_at_size(size)
+    UIFont.fontWithName(SUPER_BOLD_FONT_FACE, size: size)
   end
 
   # Returns the standard font at the provided font's size

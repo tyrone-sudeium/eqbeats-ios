@@ -293,11 +293,11 @@
             </objects>
             <point key="canvasLocation" x="1514" y="70"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - Featured-->
         <scene sceneID="P2H-zI-xuW">
             <objects>
                 <navigationController id="fKu-Yw-Y8l" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="featured" id="6It-Yh-zpZ"/>
+                    <tabBarItem key="tabBarItem" title="Featured" image="FeaturedIcon.png" id="6It-Yh-zpZ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1l7-qp-d1j">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -331,11 +331,11 @@
             </objects>
             <point key="canvasLocation" x="988" y="70"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navigation Controller - Search-->
         <scene sceneID="UTf-Ek-Rur">
             <objects>
                 <navigationController id="8yb-G4-MZA" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="search" id="81T-wP-B5a"/>
+                    <tabBarItem key="tabBarItem" title="Search" image="SearchIcon.png" id="81T-wP-B5a"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="a1m-Hg-Keb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -352,8 +352,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="FeaturedIcon.png" width="40" height="39"/>
         <image name="PlaylistIcon.png" width="24" height="24"/>
         <image name="RadioIcon.png" width="26" height="24"/>
+        <image name="SearchIcon.png" width="24" height="24"/>
     </resources>
     <classes>
         <class className="LatestViewController" superclassName="UITableViewController">
@@ -369,6 +371,7 @@
         <class className="MainTabBarController" superclassName="UITabBarController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MainTabBarController.h"/>
             <relationships>
+                <relationship kind="action" name="viewDidLoad"/>
                 <relationship kind="action" name="viewWillAppear:"/>
             </relationships>
         </class>
