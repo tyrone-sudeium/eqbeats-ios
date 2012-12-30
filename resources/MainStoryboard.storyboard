@@ -246,6 +246,7 @@
                         <outlet property="elapsed_label" destination="hv5-fd-Afe" id="98Y-Gs-Dnf"/>
                         <outlet property="forward_button" destination="KVt-86-viv" id="RKU-rl-w0M"/>
                         <outlet property="play_pause_button" destination="guq-Ox-92F" id="YUp-e2-60D"/>
+                        <outlet property="queue_length_label" destination="mZ3-xh-hMp" id="PYC-H7-YiT"/>
                         <outlet property="remaining_label" destination="R7Z-GP-ZVF" id="2D5-vc-y3d"/>
                         <outlet property="rewind_button" destination="k1x-sv-BZx" id="D2o-rc-qSA"/>
                         <outlet property="slider" destination="8ja-uU-EpY" id="4Iw-cF-eaH"/>
@@ -773,7 +774,13 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayerViewController.h"/>
             <relationships>
                 <relationship kind="action" name="backButtonAction"/>
+                <relationship kind="action" name="update_buttons"/>
+                <relationship kind="action" name="update_duration_labels"/>
+                <relationship kind="action" name="update_everything"/>
+                <relationship kind="action" name="update_slider"/>
                 <relationship kind="action" name="viewDidLoad"/>
+                <relationship kind="action" name="viewWillAppear:"/>
+                <relationship kind="action" name="viewWillDisappear:"/>
                 <relationship kind="outlet" name="artist_label" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="artwork_view" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="back_button_item" candidateClass="UIBarButtonItem"/>
@@ -781,6 +788,7 @@
                 <relationship kind="outlet" name="forward_button" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="name_label" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="play_pause_button" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="queue_length_label" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="remaining_label" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="rewind_button" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="slider" candidateClass="UISlider"/>

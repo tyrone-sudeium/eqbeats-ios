@@ -38,6 +38,14 @@ module EQBeats::Theme
     UIImage.imageNamed('BackButtonHighlighted.png').stretchableImageWithLeftCapWidth(14, topCapHeight:0)
   end
 
+  def play_button_image
+    UIImage.imageNamed('Play.png')
+  end
+
+  def pause_button_image
+    UIImage.imageNamed('Pause.png')
+  end
+
 end
 
 ::Theme = ::EQBeats::Theme unless defined?(::Theme)

@@ -49,31 +49,18 @@ module EQBeats::AudioPlayer
     return if player.nil?
     p 'adding observers'
 
-    observe_block = -> notification {
-      p 'current item changed'
-      new_item = self.player.currentItem
-      unobserve(@old_item, 'status') unless @old_item.nil?
-      observe(new_item, 'status') do |old_status, new_status|
-        p 'status changed'
-        update_playback_state
-        if new_status == AVPlayerStatusReadyToPlay
-          update_observer_timers
-        end
+    if @item_observer.nil?
+      @item_observer = App.notification_center.observe AVPlayerItemDidPlayToEndTimeNotification do |notification|
+        current_item_changed notification
       end
-      self.observers.each do |obs|
-        obs.trigger :current_item_changed
-      end
-      @old_item = self.player.currentItem
-    }
-
-    @item_observer = App.notification_center.observe AVPlayerItemDidPlayToEndTimeNotification, &observe_block
+    end
 
     observe(@player, 'rate') do |old_item, new_item|
       p 'rate changed'
       update_playback_state
     end
     update_observer_timers
-    observe_block.call(nil) unless @player.currentItem.nil?
+    current_item_changed unless @player.currentItem.nil?
   end
 
   def playback_state=(state)
@@ -109,8 +96,8 @@ module EQBeats::AudioPlayer
   end
 
   def previous_track
-    return unless queue_has_previous_item?
-    index = self.queue_items.indexOfObject(self.player.items[0]) - 1
+    return unless has_previous_item?
+    index = queue_position - 2
     items = self.queue_items.slice(index,self.queue_items.length)
     self.player.removeAllItems
     items.each do |item|
@@ -131,6 +118,22 @@ module EQBeats::AudioPlayer
     self.player.rate > 0
   end
 
+  def has_previous_item?
+    return false if self.player.items.empty? or self.queue_items.count < 2
+    self.queue_items.indexOfObject(self.player.items[0]) > 0
+  end
+
+  def has_next_item?
+    return false if self.player.items.empty? or self.queue_items.count < 2
+    true
+  end
+
+  # Counts from 1
+  def queue_position
+    return 0 if self.player.items.empty?
+    self.queue_items.indexOfObject(self.player.items[0]) + 1
+  end
+
   def elapsed_time
     return KCMTimeInvalid if self.player.currentItem.status != AVPlayerItemStatusReadyToPlay
     self.player.currentItem.currentTime
@@ -148,11 +151,6 @@ module EQBeats::AudioPlayer
 
   # queue_items is a list of AVPlayerItems
   attr_accessor :queue_items
-
-  def queue_has_previous_item?
-    return false if self.player.items.empty? or self.queue_items.count < 2
-    self.queue_items.indexOfObject(self.player.items[0]) > 0
-  end
 
   def player_items_from_tracks(tracks)
     tracks.map do |track|
@@ -192,6 +190,23 @@ module EQBeats::AudioPlayer
         end
       end
     end
+  end
+
+  def current_item_changed(notification=nil)
+    p 'current item changed'
+    new_item = self.player.currentItem
+    unobserve(@old_item, 'status') unless @old_item.nil?
+    observe(new_item, 'status') do |old_status, new_status|
+      p 'status changed'
+      update_playback_state
+      if new_status == AVPlayerStatusReadyToPlay
+        update_observer_timers
+      end
+    end
+    self.observers.each do |obs|
+      obs.trigger :current_item_changed
+    end
+    @old_item = self.player.currentItem
   end
 
 end
