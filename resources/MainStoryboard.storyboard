@@ -151,13 +151,6 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="iHm-DL-8lz">
-                                        <rect key="frame" x="45" y="54" width="230" height="23"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="minimumTrackTintColor" red="0.58823531870000001" green="0.32549020649999999" blue="0.72941178080000002" alpha="0.69999999999999996" colorSpace="deviceRGB"/>
-                                        <color key="maximumTrackTintColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <color key="thumbTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    </slider>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="guq-Ox-92F">
                                         <rect key="frame" x="138" y="5" width="44" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -182,6 +175,18 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
+                                    <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1.5" id="3jD-5Z-EKe">
+                                        <rect key="frame" x="45" y="54" width="230" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="minimumTrackTintColor" red="0.58823531870000001" green="0.32549020649999999" blue="0.72941178080000002" alpha="0.69999999999999996" colorSpace="deviceRGB"/>
+                                        <color key="maximumTrackTintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="thumbTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </slider>
+                                    <view opaque="NO" contentMode="scaleToFill" id="BzJ-fJ-w16" customClass="MPVolumeView">
+                                        <rect key="frame" x="45" y="54" width="230" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -244,12 +249,14 @@
                         <outlet property="artwork_view" destination="Lx5-IY-N99" id="B1x-Yg-Rsl"/>
                         <outlet property="back_button_item" destination="iBJ-Nh-aAi" id="5RI-eq-aGh"/>
                         <outlet property="elapsed_label" destination="hv5-fd-Afe" id="98Y-Gs-Dnf"/>
+                        <outlet property="fake_volume_slider" destination="3jD-5Z-EKe" id="oDB-vR-neU"/>
                         <outlet property="forward_button" destination="KVt-86-viv" id="RKU-rl-w0M"/>
                         <outlet property="play_pause_button" destination="guq-Ox-92F" id="YUp-e2-60D"/>
                         <outlet property="queue_length_label" destination="mZ3-xh-hMp" id="PYC-H7-YiT"/>
                         <outlet property="remaining_label" destination="R7Z-GP-ZVF" id="2D5-vc-y3d"/>
                         <outlet property="rewind_button" destination="k1x-sv-BZx" id="D2o-rc-qSA"/>
                         <outlet property="slider" destination="8ja-uU-EpY" id="4Iw-cF-eaH"/>
+                        <outlet property="volume_view" destination="BzJ-fJ-w16" id="Oti-TN-5Wg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tnQ-35-VDA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -785,6 +792,7 @@
                 <relationship kind="outlet" name="artwork_view" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="back_button_item" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="elapsed_label" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="fake_volume_slider" candidateClass="UISlider"/>
                 <relationship kind="outlet" name="forward_button" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="name_label" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="play_pause_button" candidateClass="UIButton"/>
@@ -792,6 +800,7 @@
                 <relationship kind="outlet" name="remaining_label" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="rewind_button" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="slider" candidateClass="UISlider"/>
+                <relationship kind="outlet" name="volume_view" candidateClass="MPVolumeView"/>
             </relationships>
         </class>
         <class className="PlaylistsViewController" superclassName="UITableViewController">

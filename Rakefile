@@ -20,7 +20,8 @@ Motion::Project::App.setup do |app|
     'MobileCoreServices',
     'Security',
     'QuartzCore',
-    'AVFoundation'
+    'AVFoundation',
+    'MediaPlayer'
   ]
   app.device_family = [:iphone, :ipad]
   app.prerendered_icon = true

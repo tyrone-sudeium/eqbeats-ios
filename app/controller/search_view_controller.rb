@@ -10,7 +10,9 @@ class SearchViewController < UITableViewController
   def viewWillAppear(animated)
     super
     @@track_cell_nib ||= UINib.nibWithNibName('TrackCell', bundle: NSBundle.mainBundle)
+    @@user_cell_nib ||= UINib.nibWithNibName('UserCell', bundle: NSBundle.mainBundle)
     self.tableView.registerNib(@@track_cell_nib, forCellReuseIdentifier:'TrackCell')
+    self.tableView.registerNib(@@user_cell_nib, forCellReuseIdentifier:'UserCell')
     #self.searchBar.text_field.font = Theme.normal_font_at_size(13)
     reloadData
   end
@@ -27,6 +29,8 @@ class SearchViewController < UITableViewController
 
   def searchDisplayController(controller, shouldReloadTableForSearchScope:searchOption)
     # Load new search
+    @search_results = []
+    reloadData
     performSearchDelayed
     false
   end
@@ -38,6 +42,12 @@ class SearchViewController < UITableViewController
 
   def searchDisplayController(controller, willShowSearchResultsTableView:tableView)
     tableView.registerNib(@@track_cell_nib, forCellReuseIdentifier:'TrackCell')
+    tableView.registerNib(@@user_cell_nib, forCellReuseIdentifier:'UserCell')
+  end
+
+  def searchDisplayControllerDidEndSearch(controller)
+    @search_results = []
+    reloadData
   end
 
   def searchTableView
@@ -78,8 +88,28 @@ class SearchViewController < UITableViewController
   end
 
   def tableView(tableView, cellForRowAtIndexPath: indexPath)
-    cell = tableView.dequeueReusableCellWithIdentifier('TrackCell')
+    return unless tableView == self.searchTableView
+    case searchBar.selectedScopeButtonIndex
+    when 0
+      # Track Search
+      track_cell_for_row indexPath.row
+    when 1
+      # User Search
+      user_cell_for_row indexPath.row
+    end
+  end
+
+  def tableView(tableView, didSelectRowAtIndexPath: indexPath)
     track = @search_results[indexPath.row]
+    AudioPlayer.playback_queue = [track]
+    AudioPlayer.play
+    player = self.storyboard.instantiateViewControllerWithIdentifier('NowPlaying')
+    App.delegate.navigation_controller.pushViewController(player, animated:true)
+  end
+
+  def track_cell_for_row(row)
+    cell = tableView.dequeueReusableCellWithIdentifier('TrackCell')
+    track = @search_results[row]
     # Theming
     cell.titleLabel.font = Theme.adjust_font_face(cell.titleLabel.font)
     cell.detailTitleLabel.font = Theme.adjust_font_face(cell.detailTitleLabel.font)
@@ -90,12 +120,16 @@ class SearchViewController < UITableViewController
     cell
   end
 
-  def tableView(tableView, didSelectRowAtIndexPath: indexPath)
-    track = @search_results[indexPath.row]
-    AudioPlayer.playback_queue = [track]
-    AudioPlayer.play
-    player = self.storyboard.instantiateViewControllerWithIdentifier('NowPlaying')
-    App.delegate.navigation_controller.pushViewController(player, animated:true)
+  def user_cell_for_row(row)
+    cell = tableView.dequeueReusableCellWithIdentifier('UserCell')
+    user = @search_results[row]
+    # Theming
+    cell.name_label.font = Theme.adjust_font_face(cell.name_label.font)
+    cell.description_label.font = Theme.adjust_font_face(cell.description_label.font)
+
+    cell.name_label.text = user.name
+    cell.description_label.text = user.plain_detail
+    cell
   end
 
 end

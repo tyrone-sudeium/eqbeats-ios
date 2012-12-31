@@ -12,6 +12,8 @@ class PlayerViewController < UIViewController
   outlet :queue_length_label, UILabel
   outlet :artwork_view, UIImageView
   outlet :back_button_item, UIBarButtonItem
+  outlet :volume_view, MPVolumeView
+  outlet :fake_volume_slider, UISlider
 
   attr_accessor :observer
 
@@ -19,6 +21,10 @@ class PlayerViewController < UIViewController
     super
     self.back_button_item.setBackgroundImage(Theme.black_back_button_image, forState:UIControlStateNormal, barMetrics:UIBarMetricsDefault)
     self.back_button_item.setBackgroundImage(Theme.black_back_button_highlighted_image, forState:UIControlStateHighlighted, barMetrics:UIBarMetricsDefault)
+
+    if Device.simulator?
+      self.fake_volume_slider.hidden = false
+    end
   end
 
   def viewWillAppear(animated)

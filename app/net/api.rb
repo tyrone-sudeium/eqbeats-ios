@@ -17,7 +17,10 @@ module EQBeats
 
     # Searches for a user based on the provided query.
     def search_user(query, block)
-
+      if not query.nil?
+        query = query.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+        get "#{@base_url}/users/search/json?q=#{query}", user_mapping, block
+      end
     end
 
     # Get favourite track list for the provided user
