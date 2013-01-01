@@ -64,11 +64,19 @@ class SearchViewController < UITableViewController
   end
 
   def performSearch
+    return if searchBar.text.length < 3
     @search_results = []
     reloadData
     case searchBar.selectedScopeButtonIndex
     when 0
       App.delegate.api.search_track "#{searchBar.text}", -> results {
+        if results.is_a? NSArray
+          @search_results = results
+          reloadData
+        end
+      }
+    when 1
+      App.delegate.api.search_user "#{searchBar.text}", -> results {
         if results.is_a? NSArray
           @search_results = results
           reloadData
@@ -88,14 +96,14 @@ class SearchViewController < UITableViewController
   end
 
   def tableView(tableView, cellForRowAtIndexPath: indexPath)
-    return unless tableView == self.searchTableView
+    #return unless tableView == self.searchTableView
     case searchBar.selectedScopeButtonIndex
     when 0
       # Track Search
-      track_cell_for_row indexPath.row
+      return track_cell_for_row indexPath.row
     when 1
       # User Search
-      user_cell_for_row indexPath.row
+      return user_cell_for_row indexPath.row
     end
   end
 
@@ -129,6 +137,7 @@ class SearchViewController < UITableViewController
 
     cell.name_label.text = user.name
     cell.description_label.text = user.plain_detail
+    cell.image_view.setImageWithURL(NSURL.URLWithString(user.avatar))
     cell
   end
 

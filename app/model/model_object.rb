@@ -4,7 +4,7 @@ module EQBeats
 
     def detail=(detail)
       @detail = detail
-      self.plain_detail = self.detail.gsub /\[([^\]=]*)[^\]]*\](.*)\[\/\1\]/i, '\2')
+      self.plain_detail = self.detail.gsub(/\[([^\]=]*)[^\]]*\](.*)\[\/\1\]/i, '\2')
     end
   end
 end

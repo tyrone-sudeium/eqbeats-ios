@@ -143,7 +143,7 @@ module EQBeats
 
     def set_user_mapping_attributes(mapping)
       mapping.mapAttributesFromArray(['id', 'name', 
-        'html_description', 'link'])
+        'html_description', 'link', 'avatar'])
       mapping.mapKeyPath('description', toAttribute: 'detail')
     end
 
