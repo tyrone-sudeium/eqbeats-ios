@@ -55,15 +55,15 @@ module EQBeats
     end
 
     def get_latest_tracks(block)
-
+      get "#{@base_url}/tracks/latest/json", track_mapping, block
     end
 
     def get_featured_tracks(block)
-
+      get "#{@base_url}/tracks/featured/json", track_mapping, block
     end
 
     def get_random_tracks(block)
-
+      get "#{@base_url}/tracks/random/json", track_mapping, block
     end
 
     def get_playlist(id, block)
@@ -159,5 +159,9 @@ module EQBeats
       mapping.mapKeyPath('description', toAttribute: 'detail')
     end
 
+  end
+
+  def self.api
+    App.delegate.api
   end
 end
