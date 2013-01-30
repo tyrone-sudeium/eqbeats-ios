@@ -21,12 +21,25 @@ module EQBeats::AudioPlayer
   
   # playback_queue is a list of Track model objects
   attr_accessor :playback_queue, :player, :observers
-  attr_accessor :playback_state
+  attr_accessor :playback_state, :queue_position
 
   def playback_queue=(queue)
     @playback_queue = queue
     self.queue_items = player_items_from_tracks(queue)
     self.player = nil
+  end
+
+  # Counts from 1
+  def queue_position
+    return 0 if self.player.items.empty?
+    self.queue_items.indexOfObject(self.player.items[0]) + 1
+  end
+
+  def queue_position=(index)
+    self.player = nil
+    self.queue_items = player_items_from_tracks self.playback_queue
+    items = self.queue_items.slice(index-1,self.queue_items.length)
+    self.player = AVQueuePlayer.queuePlayerWithItems(items)
   end
 
   def player
@@ -43,7 +56,7 @@ module EQBeats::AudioPlayer
       end
       unobserve(@player, 'currentItem')
       unobserve(@player, 'rate')
-      @player.removeAllitems
+      @player.removeAllItems
     end
     @player = player
     return if player.nil?
@@ -99,6 +112,7 @@ module EQBeats::AudioPlayer
     return unless has_previous_item?
     index = queue_position - 2
     items = self.queue_items.slice(index,self.queue_items.length)
+    items = player_items_from_tracks items
     self.player.removeAllItems
     items.each do |item|
       self.player.insertItem(item, afterItem:nil)
@@ -124,14 +138,8 @@ module EQBeats::AudioPlayer
   end
 
   def has_next_item?
-    return false if self.player.items.empty? or self.queue_items.count < 2
+    return false if self.player.items.empty? or self.player.items.count < 2
     true
-  end
-
-  # Counts from 1
-  def queue_position
-    return 0 if self.player.items.empty?
-    self.queue_items.indexOfObject(self.player.items[0]) + 1
   end
 
   def elapsed_time

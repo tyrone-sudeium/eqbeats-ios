@@ -8,6 +8,8 @@ class AppDelegate
     @window.rootViewController = rootVC
     @window.makeKeyAndVisible
 
+    NSUserDefaults.standardUserDefaults['UserAgent'] = "EQBeats-iOS #{App.version}"
+
     setup_appearance
 
     true

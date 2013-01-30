@@ -2,12 +2,16 @@ class Track < EQBeats::ModelObject
   attr_accessor :title, :artist, :download, :player_item
 
   def asset_url
-    return NSURL.URLWithString(mp3) unless cached?
+    return NSURL.URLWithString(mp4) unless cached?
     NSURL.fileURLWithPath(cache_path).absoluteString
   end
 
   def mp3
     self.download[:mp3]
+  end
+
+  def mp4
+    self.download[:aac]
   end
 
   # quality, :thumb, :medium, :full
@@ -25,7 +29,7 @@ class Track < EQBeats::ModelObject
   end
 
   def cache_path
-    "#{App.cache_path}/track_#{id}.mp3"
+    "#{App.cache_path}/track_#{id}.m4a"
   end
 
   def cached?

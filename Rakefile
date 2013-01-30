@@ -12,8 +12,11 @@ require 'motion-cocoapods'
 
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
-  app.name = 'eqbeats'
+  app.name = 'eqbeats-ios'
   app.identifier = 'com.sudeium.eqbeats'
+  app.version = "1.0.0"
+  app.short_version = "1"
+  app.interface_orientations = [:portrait]
   app.frameworks += [
     'CFNetwork',
     'SystemConfiguration',
@@ -25,6 +28,7 @@ Motion::Project::App.setup do |app|
   ]
   app.device_family = [:iphone, :ipad]
   app.prerendered_icon = true
+  app.info_plist['CFBundleDisplayName'] = 'eqbeats'
   app.pods do
     #pod 'BlocksKit'
     pod 'RestKit', '~>0.10.3'

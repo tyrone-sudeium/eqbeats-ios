@@ -30,4 +30,8 @@ module BubbleWrap::App
     NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, true)[0]
   end
 
+  def api
+    self.delegate.api
+  end
+
 end
