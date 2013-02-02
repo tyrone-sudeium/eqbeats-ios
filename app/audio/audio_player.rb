@@ -22,6 +22,7 @@ module EQBeats::AudioPlayer
   # playback_queue is a list of Track model objects
   attr_accessor :playback_queue, :player, :observers
   attr_accessor :playback_state, :queue_position
+  attr_accessor :autoplay
 
   def playback_queue=(queue)
     @playback_queue = queue
@@ -76,6 +77,10 @@ module EQBeats::AudioPlayer
     current_item_changed unless @player.currentItem.nil?
   end
 
+  def autoplay
+    @autoplay ||= false
+  end
+
   def playback_state=(state)
     if state != @playback_state
       @playback_state = state
@@ -91,16 +96,26 @@ module EQBeats::AudioPlayer
   end
 
   def toggle_play_pause
-    if playing? then self.player.pause else self.player.play end
+    if playing? or self.autoplay then
+      self.autoplay = false
+      self.player.pause
+    else
+      self.autoplay = true
+      self.player.play
+    end
   end
 
   def stop
+    return if not playing?
     self.player.stop
+    self.autoplay = false
     set_audio_session_active false
   end
 
   def play
+    return if playing?
     set_audio_session_active true
+    self.autoplay = true
     self.player.play
   end
 
@@ -126,6 +141,11 @@ module EQBeats::AudioPlayer
       session
     end
     @audio_session.setActive(active, error:nil)
+    if active
+      UIApplication.sharedApplication.beginReceivingRemoteControlEvents
+    else
+      UIApplication.sharedApplication.endReceivingRemoteControlEvents
+    end
   end
 
   def playing?
@@ -153,6 +173,11 @@ module EQBeats::AudioPlayer
     else
       self.player.currentItem.duration
     end
+  end
+
+  def current_item
+    index = self.queue_items.indexOfObject(self.player.items[0])
+    self.playback_queue[index]
   end
 
   protected
@@ -204,6 +229,14 @@ module EQBeats::AudioPlayer
     p 'current item changed'
     new_item = self.player.currentItem
     unobserve(@old_item, 'status') unless @old_item.nil?
+    unobserve(@old_item, 'playbackLikelyToKeepUp') unless @old_item.nil?
+    observe(new_item, 'playbackLikelyToKeepUp') do |old_status, new_status|
+      p "likely to keep up?: #{new_status}"
+      if new_status == true and self.autoplay
+        self.player.play
+      end
+    end
+
     observe(new_item, 'status') do |old_status, new_status|
       p 'status changed'
       update_playback_state

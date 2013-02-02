@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="KLZ-B6-sQK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="KLZ-B6-sQK">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -122,10 +122,10 @@
                         <subviews>
                             <view contentMode="scaleToFill" id="lQr-Lr-TLm">
                                 <rect key="frame" x="0.0" y="120" width="320" height="332"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" id="Lx5-IY-N99">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="320"/>
+                                        <rect key="frame" x="0.0" y="12" width="320" height="320"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
                                 </subviews>
@@ -135,7 +135,7 @@
                                 <rect key="frame" x="0.0" y="452" width="320" height="96"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="NowPlayingBottomBackground.png" id="IrR-dm-WDB">
+                                    <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" image="NowPlayingBottomBackground.png" id="IrR-dm-WDB">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="96"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </imageView>
@@ -150,6 +150,9 @@
                                         <state key="highlighted">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="previousButtonAction" destination="kKd-8I-kNo" eventType="touchUpInside" id="lHA-lw-wlA"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="guq-Ox-92F">
                                         <rect key="frame" x="138" y="5" width="44" height="45"/>
@@ -162,6 +165,9 @@
                                         <state key="highlighted">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="playPauseButtonAction" destination="kKd-8I-kNo" eventType="touchUpInside" id="gge-0T-C8H"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="KVt-86-viv">
                                         <rect key="frame" x="208" y="5" width="44" height="45"/>
@@ -174,6 +180,9 @@
                                         <state key="highlighted">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="nextButtonAction" destination="kKd-8I-kNo" eventType="touchUpInside" id="vaG-3M-XVu"/>
+                                        </connections>
                                     </button>
                                     <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1.5" id="3jD-5Z-EKe">
                                         <rect key="frame" x="45" y="54" width="230" height="23"/>
@@ -761,6 +770,13 @@
     <classes>
         <class className="FeaturedViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FeaturedViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="numberOfSectionsInTableView:"/>
+                <relationship kind="action" name="reloadData"/>
+                <relationship kind="action" name="sections"/>
+                <relationship kind="action" name="track_for_index_path:"/>
+                <relationship kind="action" name="viewWillAppear:"/>
+            </relationships>
         </class>
         <class className="LaunchViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/LaunchViewController.h"/>
@@ -781,6 +797,10 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayerViewController.h"/>
             <relationships>
                 <relationship kind="action" name="backButtonAction"/>
+                <relationship kind="action" name="nextButtonAction"/>
+                <relationship kind="action" name="playPauseButtonAction"/>
+                <relationship kind="action" name="previousButtonAction"/>
+                <relationship kind="action" name="update_album_art"/>
                 <relationship kind="action" name="update_buttons"/>
                 <relationship kind="action" name="update_duration_labels"/>
                 <relationship kind="action" name="update_everything"/>
@@ -830,6 +850,7 @@
                 <relationship kind="action" name="searchDisplayControllerDidEndSearch:"/>
                 <relationship kind="action" name="searchTableView"/>
                 <relationship kind="action" name="track_for_index_path:"/>
+                <relationship kind="action" name="tracks_for_queue_at_index_path:"/>
                 <relationship kind="action" name="user_cell_for_row:"/>
                 <relationship kind="action" name="viewDidAppear:"/>
                 <relationship kind="action" name="viewDidLoad"/>

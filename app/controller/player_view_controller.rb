@@ -45,6 +45,9 @@ class PlayerViewController < UIViewController
 
       update_buttons
     end
+    self.observer.on :current_item_changed do
+      update_everything
+    end
 
     update_everything
   end
@@ -55,16 +58,34 @@ class PlayerViewController < UIViewController
     AudioPlayer.observers.delete self.observer
   end
 
+  def viewDidAppear(animated)
+    super
+    update_everything
+  end
+
   # Actions
 
   def backButtonAction
     self.navigationController.popViewControllerAnimated(true)
   end
 
+  def previousButtonAction
+    AudioPlayer.previous_track
+  end
+
+  def nextButtonAction
+    AudioPlayer.next_track
+  end
+
+  def playPauseButtonAction
+    AudioPlayer.toggle_play_pause
+  end
+
   def update_everything
     update_slider
     update_duration_labels
     update_buttons
+    update_album_art
   end
 
   def update_slider
@@ -83,11 +104,15 @@ class PlayerViewController < UIViewController
   end
 
   def update_duration_labels
+    self.queue_length_label.text = "#{AudioPlayer.queue_position} of #{AudioPlayer.playback_queue.length}"
+
     duration = AudioPlayer.duration
     if !duration.valid? or duration.infinity?
       self.elapsed_label.hidden = true
       self.remaining_label.hidden = true
-      self.queue_length_label.text = "1 of 1"
+      if AudioPlayer.queue_position == 0 or AudioPlayer.playback_queue.length == 0
+        self.queue_length_label.text = "1 of 1"
+      end
       return
     else
       self.elapsed_label.hidden = false
@@ -99,13 +124,20 @@ class PlayerViewController < UIViewController
     remaining_seconds = (duration_seconds - elapsed_seconds).ceil
     self.elapsed_label.text = Time.at(elapsed_seconds.floor).gmtime.strftime('%M:%S')
     self.remaining_label.text = Time.at(remaining_seconds).gmtime.strftime('%M:%S')
-
-    self.queue_length_label.text = "#{AudioPlayer.queue_position} of #{AudioPlayer.playback_queue.length}"
   end
 
   def update_buttons
-    self.rewind_button.enabled = AudioPlayer.has_next_item?
-    self.forward_button.enabled = AudioPlayer.has_previous_item?
+    self.rewind_button.enabled = AudioPlayer.has_previous_item?
+    self.forward_button.enabled = AudioPlayer.has_next_item?
+
+    # You can also rewind if your current track is loaded
+    if AudioPlayer.duration.valid? and not AudioPlayer.duration.infinity?
+      self.rewind_button.enabled = true
+    elsif AudioPlayer.has_previous_item?
+      self.rewind_button.enabled = true
+    else
+      self.rewind_button.enabled = false
+    end
 
     [self.rewind_button,self.forward_button].each do |button|
       if button.enabled?
@@ -115,11 +147,15 @@ class PlayerViewController < UIViewController
       end
     end
 
-    if AudioPlayer.playing?
+    if AudioPlayer.playing? or AudioPlayer.autoplay
       self.play_pause_button.setImage(Theme.pause_button_image, forState:UIControlStateNormal)
     else
       self.play_pause_button.setImage(Theme.play_button_image, forState:UIControlStateNormal)
     end
+  end
+
+  def update_album_art
+    ResourcesController.set_image_view_for_track(self.artwork_view, AudioPlayer.current_item, :medium)
   end
 
 end

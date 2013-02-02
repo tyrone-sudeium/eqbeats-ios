@@ -27,6 +27,7 @@ Motion::Project::App.setup do |app|
     'MediaPlayer'
   ]
   app.device_family = [:iphone, :ipad]
+  app.deployment_target = '6.0'
   app.prerendered_icon = true
   app.info_plist['CFBundleDisplayName'] = 'eqbeats'
   app.pods do
@@ -34,4 +35,5 @@ Motion::Project::App.setup do |app|
     pod 'RestKit', '~>0.10.3'
     pod 'SDWebImage', '>= 3.0'
   end
+  app.background_modes = [:audio]
 end

@@ -31,7 +31,7 @@ module TracksViewController
 
     cell.titleLabel.text = track.title
     cell.detailTitleLabel.text = track.artist.name
-    cell.artworkView.setImageWithURL(NSURL.URLWithString(track.art_link(:thumb)))
+    ResourcesController.set_image_view_for_track cell.artworkView, track, :thumb
     cell
   end
 
