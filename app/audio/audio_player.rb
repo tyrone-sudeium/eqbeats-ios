@@ -121,17 +121,28 @@ module EQBeats::AudioPlayer
 
   def next_track
     self.player.advanceToNextItem
+    self.player.currentItem.seekToTime(KCMTimeZero)
   end
 
   def previous_track
-    return unless has_previous_item?
-    index = queue_position - 2
-    items = self.queue_items.slice(index,self.queue_items.length)
-    items = player_items_from_tracks items
-    self.player.removeAllItems
-    items.each do |item|
-      self.player.insertItem(item, afterItem:nil)
+    if self.skip_to_track_start?
+      self.player.seekToTime(KCMTimeZero)
+    else
+      index = queue_position - 2
+      items = self.queue_items.slice(index,self.queue_items.length)
+      self.player.removeAllItems
+      items.each do |item|
+        self.player.insertItem(item, afterItem:nil)
+      end
+      self.player.currentItem.seekToTime(KCMTimeZero)
     end
+  end
+
+  def skip_to_track_start?
+    return true if not self.duration.valid? or self.duration.infinity?
+    return true if self.elapsed_time.seconds > [3, self.duration.seconds*0.1].min
+    return true if not has_previous_item?
+    return false
   end
 
   def set_audio_session_active(active)

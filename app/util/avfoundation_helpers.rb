@@ -26,4 +26,8 @@ class CMTime
   def has_been_rounded?
     self.numeric? and (self.flags & KCMTimeFlags_HasBeenRounded) != 0
   end
+
+  def seconds
+    CMTimeGetSeconds(self)
+  end
 end

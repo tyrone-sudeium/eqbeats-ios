@@ -34,6 +34,7 @@ Motion::Project::App.setup do |app|
     #pod 'BlocksKit'
     pod 'RestKit', '~>0.10.3'
     pod 'SDWebImage', '>= 3.0'
+    pod 'MarqueeLabel', :podspec => 'scripts/podspec/MarqueeLabel.podspec'
   end
   app.background_modes = [:audio]
 end

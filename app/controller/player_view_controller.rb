@@ -5,7 +5,7 @@ class PlayerViewController < UIViewController
   outlet :rewind_button,  UIButton
   outlet :forward_button, UIButton
   outlet :slider, UISlider
-  outlet :name_label, UILabel
+  outlet :name_label, MarqueeLabel
   outlet :elapsed_label, UILabel
   outlet :remaining_label, UILabel
   outlet :artist_label, UILabel
@@ -32,7 +32,7 @@ class PlayerViewController < UIViewController
     self.observer = EQBeats::AudioPlayerObserver.new
     AudioPlayer.observers << self.observer
 
-    self.observer.on :elapsed_time_changed { update_slider; update_duration_labels }
+    self.observer.on :elapsed_time_changed { update_slider; update_labels }
     self.observer.on :playback_state_changed do
       p "playback_state: #{AudioPlayer.playback_state}"
       if self.observer.timing_interval.nil?
@@ -83,7 +83,7 @@ class PlayerViewController < UIViewController
 
   def update_everything
     update_slider
-    update_duration_labels
+    update_labels
     update_buttons
     update_album_art
   end
@@ -103,20 +103,19 @@ class PlayerViewController < UIViewController
     self.slider.setValue elapsed_seconds
   end
 
-  def update_duration_labels
+  def update_labels
     self.queue_length_label.text = "#{AudioPlayer.queue_position} of #{AudioPlayer.playback_queue.length}"
+    self.name_label.text = "#{AudioPlayer.current_item.title}"
+    self.artist_label.text = "#{AudioPlayer.current_item.artist.name}"
 
     duration = AudioPlayer.duration
     if !duration.valid? or duration.infinity?
-      self.elapsed_label.hidden = true
-      self.remaining_label.hidden = true
+      self.elapsed_label.text = "0:00"
+      self.remaining_label.text = "--:--"
       if AudioPlayer.queue_position == 0 or AudioPlayer.playback_queue.length == 0
         self.queue_length_label.text = "1 of 1"
       end
       return
-    else
-      self.elapsed_label.hidden = false
-      self.remaining_label.hidden = false
     end
 
     duration_seconds = CMTimeGetSeconds(duration)

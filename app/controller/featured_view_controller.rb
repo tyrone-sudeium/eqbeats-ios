@@ -40,6 +40,10 @@ class FeaturedViewController < UITableViewController
     self.sections[indexPath.section][indexPath.row]
   end
 
+  def tracks_for_queue_at_index_path(indexPath)
+    self.sections[indexPath.section]
+  end
+
   # Table View Delegate
 
   def numberOfSectionsInTableView(tableView)

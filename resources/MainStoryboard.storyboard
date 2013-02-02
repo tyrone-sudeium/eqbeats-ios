@@ -243,11 +243,47 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem id="P3c-AE-Jyl">
+                                        <nil key="title"/>
                                         <barButtonItem key="leftBarButtonItem" title=" Back" id="iBJ-Nh-aAi">
                                             <connections>
                                                 <action selector="backButtonAction" destination="kKd-8I-kNo" id="nGa-OL-oJO"/>
                                             </connections>
                                         </barButtonItem>
+                                        <view key="titleView" opaque="NO" contentMode="scaleToFill" id="m7w-e3-7Mh">
+                                            <rect key="frame" x="70" y="6" width="180" height="33"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Song Artist" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OMK-L5-0mW">
+                                                    <rect key="frame" x="0.0" y="2" width="180" height="13"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                                                    <color key="textColor" red="0.8957154832480585" green="0.79345904206013429" blue="1" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <size key="shadowOffset" width="0.0" height="0.0"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Song Title" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9sl-q1-ccf" customClass="MarqueeLabel">
+                                                    <rect key="frame" x="0.0" y="17" width="180" height="13"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                                                    <color key="textColor" red="0.91770717327867701" green="0.79223275204982402" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <size key="shadowOffset" width="0.0" height="0.0"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="rate">
+                                                            <integer key="value" value="50"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="fadeLength">
+                                                            <integer key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="marqueeType">
+                                                            <integer key="value" value="2"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="continuousMarqueeSeparator" value="        "/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -255,11 +291,13 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
+                        <outlet property="artist_label" destination="OMK-L5-0mW" id="yUn-dr-00T"/>
                         <outlet property="artwork_view" destination="Lx5-IY-N99" id="B1x-Yg-Rsl"/>
                         <outlet property="back_button_item" destination="iBJ-Nh-aAi" id="5RI-eq-aGh"/>
                         <outlet property="elapsed_label" destination="hv5-fd-Afe" id="98Y-Gs-Dnf"/>
                         <outlet property="fake_volume_slider" destination="3jD-5Z-EKe" id="oDB-vR-neU"/>
                         <outlet property="forward_button" destination="KVt-86-viv" id="RKU-rl-w0M"/>
+                        <outlet property="name_label" destination="9sl-q1-ccf" id="pc9-c5-NW9"/>
                         <outlet property="play_pause_button" destination="guq-Ox-92F" id="YUp-e2-60D"/>
                         <outlet property="queue_length_label" destination="mZ3-xh-hMp" id="PYC-H7-YiT"/>
                         <outlet property="remaining_label" destination="R7Z-GP-ZVF" id="2D5-vc-y3d"/>
@@ -793,6 +831,9 @@
                 <relationship kind="action" name="viewWillAppear:"/>
             </relationships>
         </class>
+        <class className="MarqueeLabel" superclassName="UILabel">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MarqueeLabel.h"/>
+        </class>
         <class className="PlayerViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PlayerViewController.h"/>
             <relationships>
@@ -805,6 +846,7 @@
                 <relationship kind="action" name="update_duration_labels"/>
                 <relationship kind="action" name="update_everything"/>
                 <relationship kind="action" name="update_slider"/>
+                <relationship kind="action" name="viewDidAppear:"/>
                 <relationship kind="action" name="viewDidLoad"/>
                 <relationship kind="action" name="viewWillAppear:"/>
                 <relationship kind="action" name="viewWillDisappear:"/>
