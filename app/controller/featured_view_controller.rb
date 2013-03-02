@@ -58,4 +58,10 @@ class FeaturedViewController < UITableViewController
     ["Featured","Latest","Some Random Tracks"][section]
   end
 
+  def tableView(tableView, didSelectRowAtIndexPath: indexPath)
+    super
+    AudioPlayer.queue_position = 1 + indexPath.row
+    AudioPlayer.play
+  end
+
 end

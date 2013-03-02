@@ -5,7 +5,6 @@ module TracksViewController
     super
     @@track_cell_nib ||= UINib.nibWithNibName('TrackCell', bundle: NSBundle.mainBundle)
     self.tableView.registerNib(@@track_cell_nib, forCellReuseIdentifier:'TrackCell')
-    p 'yay!'
   end
 
   # override this

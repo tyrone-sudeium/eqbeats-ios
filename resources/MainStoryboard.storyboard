@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="KLZ-B6-sQK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C3103" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="KLZ-B6-sQK">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -813,6 +813,7 @@
                 <relationship kind="action" name="reloadData"/>
                 <relationship kind="action" name="sections"/>
                 <relationship kind="action" name="track_for_index_path:"/>
+                <relationship kind="action" name="tracks_for_queue_at_index_path:"/>
                 <relationship kind="action" name="viewWillAppear:"/>
             </relationships>
         </class>
@@ -843,8 +844,8 @@
                 <relationship kind="action" name="previousButtonAction"/>
                 <relationship kind="action" name="update_album_art"/>
                 <relationship kind="action" name="update_buttons"/>
-                <relationship kind="action" name="update_duration_labels"/>
                 <relationship kind="action" name="update_everything"/>
+                <relationship kind="action" name="update_labels"/>
                 <relationship kind="action" name="update_slider"/>
                 <relationship kind="action" name="viewDidAppear:"/>
                 <relationship kind="action" name="viewDidLoad"/>
@@ -856,7 +857,7 @@
                 <relationship kind="outlet" name="elapsed_label" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="fake_volume_slider" candidateClass="UISlider"/>
                 <relationship kind="outlet" name="forward_button" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="name_label" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="name_label" candidateClass="MarqueeLabel"/>
                 <relationship kind="outlet" name="play_pause_button" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="queue_length_label" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="remaining_label" candidateClass="UILabel"/>

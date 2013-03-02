@@ -110,7 +110,7 @@ class PlayerViewController < UIViewController
 
     duration = AudioPlayer.duration
     if !duration.valid? or duration.infinity?
-      self.elapsed_label.text = "0:00"
+      self.elapsed_label.text = "00:00"
       self.remaining_label.text = "--:--"
       if AudioPlayer.queue_position == 0 or AudioPlayer.playback_queue.length == 0
         self.queue_length_label.text = "1 of 1"

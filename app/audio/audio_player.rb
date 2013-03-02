@@ -122,6 +122,7 @@ module EQBeats::AudioPlayer
   def next_track
     self.player.advanceToNextItem
     self.player.currentItem.seekToTime(KCMTimeZero)
+    current_item_changed
   end
 
   def previous_track
@@ -135,6 +136,7 @@ module EQBeats::AudioPlayer
         self.player.insertItem(item, afterItem:nil)
       end
       self.player.currentItem.seekToTime(KCMTimeZero)
+      current_item_changed
     end
   end
 
