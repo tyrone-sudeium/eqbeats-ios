@@ -45,4 +45,12 @@ class MainTabBarController < UITabBarController
     updateButtonSelectionState
   end
 
+  def toPlaybackControlsAction(sender)
+    customTabBarView.scrollView.setContentOffset([customTabBarView.scrollView.frame.size.width, 0], animated: true)
+  end
+
+  def toTabBarControlsAction(sender)
+    customTabBarView.scrollView.setContentOffset([0, 0], animated: true)
+  end
+
 end

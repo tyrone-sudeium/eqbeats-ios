@@ -10,6 +10,7 @@ class EQBeatsTabBarView < UIView
 
   def awakeFromNib
     super
+    self.contentView.setBackgroundColor(UIColor.clearColor)
     self.scrollView.addSubview(self.contentView)
     self.scrollView.setContentSize(self.contentView.frame.size)
   end

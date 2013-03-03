@@ -551,7 +551,7 @@
                                             <rect key="frame" x="10" y="1" width="280" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Love EQBeats?  Why not give us 5 stars on the App Store?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BEy-R6-ESx">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Love EqBeats?  Why not give us 5 stars on the App Store?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BEy-R6-ESx">
                                                     <rect key="frame" x="10" y="0.0" width="260" height="64"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -792,7 +792,7 @@
     </scenes>
     <resources>
         <image name="AboutIcon.png" width="24" height="21"/>
-        <image name="FeaturedIcon.png" width="40" height="39"/>
+        <image name="FeaturedIcon.png" width="39" height="26"/>
         <image name="NextTrack.png" width="31" height="23"/>
         <image name="NowPlayingBottomBackground.png" width="320" height="96"/>
         <image name="NowPlayingTopBackground.png" width="1" height="76"/>
@@ -828,8 +828,13 @@
         <class className="MainTabBarController" superclassName="UITabBarController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MainTabBarController.h"/>
             <relationships>
+                <relationship kind="action" name="tabButtonAction:"/>
+                <relationship kind="action" name="toPlaybackControlsAction:"/>
+                <relationship kind="action" name="toTabBarControlsAction:"/>
+                <relationship kind="action" name="updateButtonSelectionState"/>
                 <relationship kind="action" name="viewDidLoad"/>
                 <relationship kind="action" name="viewWillAppear:"/>
+                <relationship kind="outletCollection" name="buttons" candidateClass="UIButton"/>
             </relationships>
         </class>
         <class className="MarqueeLabel" superclassName="UILabel">
