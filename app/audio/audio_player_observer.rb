@@ -25,3 +25,14 @@ class EQBeats::AudioPlayerObserver
   end
 
 end
+
+module AudioPlayerObservingViewController
+  attr_accessor :observer
+
+  def viewWillAppear(animated)
+    super
+    self.observer = EQBeats::AudioPlayerObserver.new
+    AudioPlayer.observers << self.observer
+  end
+
+end

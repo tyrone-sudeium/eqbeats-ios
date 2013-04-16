@@ -37,4 +37,5 @@ Motion::Project::App.setup do |app|
     pod 'MarqueeLabel', :podspec => 'scripts/podspec/MarqueeLabel.podspec'
   end
   app.background_modes = [:audio]
+  app.entitlements['get-task-allow'] = true
 end

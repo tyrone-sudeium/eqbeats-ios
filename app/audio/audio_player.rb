@@ -32,7 +32,7 @@ module EQBeats::AudioPlayer
 
   # Counts from 1
   def queue_position
-    return 0 if self.player.items.empty?
+    return 0 if self.player.nil? || self.player.items.empty?
     self.queue_items.indexOfObject(self.player.items[0]) + 1
   end
 
@@ -41,13 +41,6 @@ module EQBeats::AudioPlayer
     self.queue_items = player_items_from_tracks self.playback_queue
     items = self.queue_items.slice(index-1,self.queue_items.length)
     self.player = AVQueuePlayer.queuePlayerWithItems(items)
-  end
-
-  def player
-    if @player.nil?
-      self.player = AVQueuePlayer.queuePlayerWithItems self.queue_items
-    end
-    @player
   end
 
   def player=(player)
@@ -96,7 +89,7 @@ module EQBeats::AudioPlayer
   end
 
   def toggle_play_pause
-    if playing? or self.autoplay then
+    if playing? or self.autoplay
       self.autoplay = false
       self.player.pause
     else
@@ -149,7 +142,7 @@ module EQBeats::AudioPlayer
 
   def set_audio_session_active(active)
     @audio_session ||= begin
-      session = AVAudioSession.sharedInstance;
+      session = AVAudioSession.sharedInstance
       session.setCategory(AVAudioSessionCategoryPlayback, error:nil)
       session
     end
@@ -162,25 +155,28 @@ module EQBeats::AudioPlayer
   end
 
   def playing?
+    return false if player.nil?
     self.player.rate > 0
   end
 
   def has_previous_item?
-    return false if self.player.items.empty? or self.queue_items.count < 2
+    return false if self.player.nil? || self.player.items.empty? || self.queue_items.count < 2
     self.queue_items.indexOfObject(self.player.items[0]) > 0
   end
 
   def has_next_item?
-    return false if self.player.items.empty? or self.player.items.count < 2
+    return false if self.player.nil? || self.player.items.empty? || self.player.items.count < 2
     true
   end
 
   def elapsed_time
+    return KCMTimeInvalid if self.player.nil?
     return KCMTimeInvalid if self.player.currentItem.status != AVPlayerItemStatusReadyToPlay
     self.player.currentItem.currentTime
   end
 
   def duration
+    return KCMTimeInvalid if self.player.nil?
     if self.player.currentItem.nil? or self.player.currentItem.status != AVPlayerItemStatusReadyToPlay
       return KCMTimeInvalid
     else
@@ -189,8 +185,8 @@ module EQBeats::AudioPlayer
   end
 
   def current_item
-    index = self.queue_items.indexOfObject(self.player.items[0])
-    self.playback_queue[index]
+    return nil if queue_items.nil? || queue_items.count == 0
+    self.playback_queue[queue_position-1]
   end
 
   protected
@@ -245,7 +241,7 @@ module EQBeats::AudioPlayer
     unobserve(@old_item, 'playbackLikelyToKeepUp') unless @old_item.nil?
     observe(new_item, 'playbackLikelyToKeepUp') do |old_status, new_status|
       p "likely to keep up?: #{new_status}"
-      if new_status == true and self.autoplay
+      if new_status != 0 and self.autoplay
         self.player.play
       end
     end

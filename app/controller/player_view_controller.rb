@@ -1,5 +1,6 @@
 class PlayerViewController < UIViewController
   extend IB
+  include AudioPlayerObservingViewController
 
   outlet :play_pause_button, UIButton
   outlet :rewind_button,  UIButton
@@ -15,8 +16,6 @@ class PlayerViewController < UIViewController
   outlet :volume_view, MPVolumeView
   outlet :fake_volume_slider, UISlider
 
-  attr_accessor :observer
-
   def viewDidLoad
     super
     self.back_button_item.setBackgroundImage(Theme.black_back_button_image, forState:UIControlStateNormal, barMetrics:UIBarMetricsDefault)
@@ -29,8 +28,6 @@ class PlayerViewController < UIViewController
 
   def viewWillAppear(animated)
     super
-    self.observer = EQBeats::AudioPlayerObserver.new
-    AudioPlayer.observers << self.observer
 
     self.observer.on :elapsed_time_changed { update_slider; update_labels }
     self.observer.on :playback_state_changed do
@@ -54,6 +51,7 @@ class PlayerViewController < UIViewController
 
   def viewWillDisappear(animated)
     super
+    p self.observer.description
     self.observer.remove_all_events
     AudioPlayer.observers.delete self.observer
   end

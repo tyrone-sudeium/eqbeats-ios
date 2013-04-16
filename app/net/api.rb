@@ -11,24 +11,26 @@ module EQBeats
     end
 
     # Gets a user based on the provided id.
-    def get_user(id, block)
-      get "#{@base_url}/user/#{id}/json", user_mapping, block
+    def get_user(id, &block)
+      get("#{@base_url}/user/#{id}/json", user_mapping, block)
     end
 
     # Searches for a user based on the provided query.
-    def search_user(query, block)
+    def search_user(query)
       if not query.nil?
         query = query.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
-        get "#{@base_url}/users/search/json?q=#{query}", user_mapping, block
+        get("#{@base_url}/users/search/json?q=#{query}", user_mapping) do |results|
+          yield results
+        end
       end
     end
 
     # Get favourite track list for the provided user
-    def get_user_favorites(id, block)
+    def get_user_favorites(id, &block)
 
     end
 
-    def get_track(id, block)
+    def get_track(id, &block)
 
     end
 
@@ -36,7 +38,7 @@ module EQBeats
     #       :track  => track name exactly
     #       :query  => search string
     #       If :query is provided, :artist and :track are ignored.
-    def search_track(opts = {}, block)
+    def search_track(opts = {}, &block)
       if opts.is_a? String
         query = opts
       else
@@ -46,27 +48,27 @@ module EQBeats
       end
       if not query.nil?
         query = query.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
-        get "#{@base_url}/tracks/search/json?q=#{query}", track_mapping, block
+        get("#{@base_url}/tracks/search/json?q=#{query}", track_mapping, block)
       elsif not artist.nil? and not track.nil?
         artist = artist.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
         track = track.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
-        get "#{@base_url}/tracks/search/exact/json?artist=#{artist}&track=#{track}", track_mapping, block
+        get("#{@base_url}/tracks/search/exact/json?artist=#{artist}&track=#{track}", track_mapping, block)
       end
     end
 
-    def get_latest_tracks(block)
-      get "#{@base_url}/tracks/latest/json", track_mapping, block
+    def get_latest_tracks(&block)
+      get("#{@base_url}/tracks/latest/json", track_mapping, block)
     end
 
-    def get_featured_tracks(block)
-      get "#{@base_url}/tracks/featured/json", track_mapping, block
+    def get_featured_tracks(&block)
+      get("#{@base_url}/tracks/featured/json", track_mapping, block)
     end
 
-    def get_random_tracks(block)
-      get "#{@base_url}/tracks/random/json", track_mapping, block
+    def get_random_tracks(&block)
+      get("#{@base_url}/tracks/random/json", track_mapping, block)
     end
 
-    def get_playlist(id, block)
+    def get_playlist(id)
 
     end
 

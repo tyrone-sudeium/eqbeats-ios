@@ -35,9 +35,7 @@ module TracksViewController
   end
 
   def tableView(tableView, didSelectRowAtIndexPath: indexPath)
-    track = self.track_for_index_path indexPath
     AudioPlayer.playback_queue = self.tracks_for_queue_at_index_path indexPath
-    AudioPlayer.play
     player = self.storyboard.instantiateViewControllerWithIdentifier('NowPlaying')
     App.delegate.navigation_controller.pushViewController(player, animated:true)
   end

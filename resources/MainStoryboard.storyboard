@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C3103" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="KLZ-B6-sQK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="KLZ-B6-sQK">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -360,7 +360,29 @@
                             <outlet property="delegate" destination="a2W-tQ-GKH" id="EIe-ie-HN2"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Featured" id="YWy-of-X4B"/>
+                    <navigationItem key="navigationItem" id="YWy-of-X4B">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="3ud-YI-ezQ">
+                            <rect key="frame" x="20" y="7" width="280" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Featured"/>
+                                <segment title="Latest"/>
+                                <segment title="Random 50"/>
+                            </segments>
+                            <color key="tintColor" red="0.58823531870000001" green="0.32549020649999999" blue="0.72941178080000002" alpha="0.69999999999999996" colorSpace="deviceRGB"/>
+                            <connections>
+                                <action selector="segmentedControlChanged:" destination="a2W-tQ-GKH" eventType="valueChanged" id="CP1-0D-SgM"/>
+                            </connections>
+                        </segmentedControl>
+                    </navigationItem>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="4JZ-qG-LKC">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.58823531870000001" green="0.32549020649999999" blue="0.72941178080000002" alpha="0.69999999999999996" colorSpace="deviceRGB"/>
+                    </refreshControl>
+                    <connections>
+                        <outlet property="segmentedControl" destination="3ud-YI-ezQ" id="jhG-oY-2mU"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XIG-Cn-EaO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -810,11 +832,15 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FeaturedViewController.h"/>
             <relationships>
                 <relationship kind="action" name="numberOfSectionsInTableView:"/>
+                <relationship kind="action" name="refreshControlChanged:"/>
                 <relationship kind="action" name="reloadData"/>
-                <relationship kind="action" name="sections"/>
+                <relationship kind="action" name="segmentedControlChanged:"/>
                 <relationship kind="action" name="track_for_index_path:"/>
+                <relationship kind="action" name="tracks"/>
                 <relationship kind="action" name="tracks_for_queue_at_index_path:"/>
+                <relationship kind="action" name="viewDidLoad"/>
                 <relationship kind="action" name="viewWillAppear:"/>
+                <relationship kind="outlet" name="segmentedControl" candidateClass="UISegmentedControl"/>
             </relationships>
         </class>
         <class className="LaunchViewController" superclassName="UIViewController">
@@ -828,12 +854,17 @@
         <class className="MainTabBarController" superclassName="UITabBarController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MainTabBarController.h"/>
             <relationships>
+                <relationship kind="action" name="nextButtonAction:"/>
+                <relationship kind="action" name="playPauseButtonAction:"/>
+                <relationship kind="action" name="previousButtonAction:"/>
                 <relationship kind="action" name="tabButtonAction:"/>
                 <relationship kind="action" name="toPlaybackControlsAction:"/>
                 <relationship kind="action" name="toTabBarControlsAction:"/>
                 <relationship kind="action" name="updateButtonSelectionState"/>
+                <relationship kind="action" name="updatePlayingItem"/>
                 <relationship kind="action" name="viewDidLoad"/>
                 <relationship kind="action" name="viewWillAppear:"/>
+                <relationship kind="action" name="viewWillDisappear:"/>
                 <relationship kind="outletCollection" name="buttons" candidateClass="UIButton"/>
             </relationships>
         </class>
@@ -912,6 +943,9 @@
                 <relationship kind="outlet" name="detailTitleLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
             </relationships>
+        </class>
+        <class className="UIRefreshControl" superclassName="UIControl">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIRefreshControl.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
