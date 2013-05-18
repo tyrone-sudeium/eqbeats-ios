@@ -27,6 +27,15 @@ module TracksViewController
     # Theming
     cell.titleLabel.font = Theme.adjust_font_face(cell.titleLabel.font)
     cell.detailTitleLabel.font = Theme.adjust_font_face(cell.detailTitleLabel.font)
+    if cell.backgroundView.nil?
+      cell.backgroundView = UIView.alloc.initWithFrame(cell.bounds)
+    end
+
+    if indexPath.row % 2 == 0
+      cell.backgroundView.setBackgroundColor('#FCF6FD'.to_color)
+    else
+      cell.backgroundView.setBackgroundColor('white'.to_color)
+    end
 
     cell.titleLabel.text = track.title
     cell.detailTitleLabel.text = track.artist.name

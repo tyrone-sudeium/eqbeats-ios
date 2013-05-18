@@ -20,13 +20,18 @@ PODS:
   - LibComponentLogging-NSLog (>= 1.0.4)
   - SOCKit
   - cocoa-oauth
+- RestKit/ObjectMapping/Core (0.10.3):
+  - ISO8601DateFormatter (>= 0.6)
+  - RestKit/Network
 - RestKit/ObjectMapping/CoreData (0.10.3):
   - ISO8601DateFormatter (>= 0.6)
   - RestKit/Network
+  - RestKit/ObjectMapping/Core
 - RestKit/ObjectMapping/JSON (0.10.3):
   - ISO8601DateFormatter (>= 0.6)
   - JSONKit (>= 1.5pre)
   - RestKit/Network
+  - RestKit/ObjectMapping/Core
 - RestKit/UI (0.10.3)
 - SDWebImage (3.0):
   - SDWebImage/Main (= 3.0)
@@ -47,17 +52,18 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   FileMD5Hash: c3b015e6fb293eea0a0c276747f61f20408c2644
   ISO8601DateFormatter: dc05a2481edf49668d85d3ff8c466c32eb544780
-  JSONKit: 3d4708953ea7ae399a49777372d8b060a43ddd27
+  JSONKit: 409734ab3407fce90ef7eaa95d7168f38d9a6601
   LibComponentLogging-Core: 344f6045453ca28fa8f2909eb9624ec9d15ef256
   LibComponentLogging-NSLog: a4bb0f6de612eef7b5fcdbd9cc96dc868ba1f2df
   MarqueeLabel: d54d4dc50fefda053aa8b639cff304384ef6bc98
-  NSData+Base64: 8b910cb8a64f45daec6fb15936c36a9a911c57ca
-  RestKit: 1fb57eb941d7d2587648491507a0bcaeb70b67f2
-  RestKit/JSON: 1fb57eb941d7d2587648491507a0bcaeb70b67f2
-  RestKit/Network: 1fb57eb941d7d2587648491507a0bcaeb70b67f2
-  RestKit/ObjectMapping/CoreData: 1fb57eb941d7d2587648491507a0bcaeb70b67f2
-  RestKit/ObjectMapping/JSON: 1fb57eb941d7d2587648491507a0bcaeb70b67f2
-  RestKit/UI: 1fb57eb941d7d2587648491507a0bcaeb70b67f2
+  NSData+Base64: 36c4e5b6479259c1a68866ccd2a8dd385c9744f7
+  RestKit: f7a8675cd98976f70bd8fdad45750b41d5754d8b
+  RestKit/JSON: f7a8675cd98976f70bd8fdad45750b41d5754d8b
+  RestKit/Network: f7a8675cd98976f70bd8fdad45750b41d5754d8b
+  RestKit/ObjectMapping/Core: f7a8675cd98976f70bd8fdad45750b41d5754d8b
+  RestKit/ObjectMapping/CoreData: f7a8675cd98976f70bd8fdad45750b41d5754d8b
+  RestKit/ObjectMapping/JSON: f7a8675cd98976f70bd8fdad45750b41d5754d8b
+  RestKit/UI: f7a8675cd98976f70bd8fdad45750b41d5754d8b
   SDWebImage: afa3965bcb37797ba4ecac49393897b99d1b4be7
   SDWebImage/Main: afa3965bcb37797ba4ecac49393897b99d1b4be7
   SOCKit: ed67aeeca4a697b63a933229e53f4670d5b9300f

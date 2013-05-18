@@ -15,6 +15,7 @@ class MainTabBarController < UITabBarController
     self.customTabBarView = EQBeatsTabBarView.loadFromNibName(nil, bundle: nil, filesOwner: self)
     self.tabBar.addSubview(self.customTabBarView)
     self.tabBar.bringSubviewToFront(self.customTabBarView)
+    self.moreNavigationController.navigationBar.setBackgroundImage(UIImage.imageNamed('NavigationBarBackground.png'), forBarMetrics: UIBarMetricsDefault)
   end
 
   def viewWillAppear(animated)

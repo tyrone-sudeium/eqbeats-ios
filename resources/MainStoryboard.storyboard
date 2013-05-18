@@ -7,7 +7,7 @@
         <!--Navigation Controller-->
         <scene sceneID="lGW-2f-gNf">
             <objects>
-                <navigationController definesPresentationContext="YES" navigationBarHidden="YES" id="KLZ-B6-sQK" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" navigationBarHidden="YES" id="KLZ-B6-sQK" customClass="EQBNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hIC-p8-ySX">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -353,6 +353,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <color key="backgroundColor" red="0.9882352941176471" green="0.96470588235294119" blue="0.99215686274509807" alpha="1" colorSpace="calibratedRGB"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -663,7 +664,7 @@
         <!--Navigation Controller - About-->
         <scene sceneID="xRq-ZH-cuw">
             <objects>
-                <navigationController definesPresentationContext="YES" id="LYz-wZ-4oU" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" id="LYz-wZ-4oU" customClass="EQBNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="About" image="AboutIcon.png" id="XvQ-pe-6KE"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Zfg-2u-4wZ">
                         <autoresizingMask key="autoresizingMask"/>
@@ -679,7 +680,7 @@
         <!--Navigation Controller - Settings-->
         <scene sceneID="3Vy-aS-MVA">
             <objects>
-                <navigationController definesPresentationContext="YES" id="KIa-48-Co2" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" id="KIa-48-Co2" customClass="EQBNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Settings" image="SettingsIcon.png" id="NJe-xL-FKx"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8wV-gf-TDp">
                         <autoresizingMask key="autoresizingMask"/>
@@ -695,7 +696,7 @@
         <!--Navigation Controller-->
         <scene sceneID="mVW-jI-MoG">
             <objects>
-                <navigationController definesPresentationContext="YES" id="wVn-2C-Pf1" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" id="wVn-2C-Pf1" customClass="EQBNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="downloads" id="HWv-26-tYX"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="bh6-A6-XLs">
                         <autoresizingMask key="autoresizingMask"/>
@@ -711,7 +712,7 @@
         <!--Navigation Controller - Radio-->
         <scene sceneID="XK5-VT-9xZ">
             <objects>
-                <navigationController definesPresentationContext="YES" id="MZJ-YO-Xpv" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" id="MZJ-YO-Xpv" customClass="EQBNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Radio" image="RadioIcon.png" id="phF-Su-vQG"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1l3-DH-5gS">
                         <autoresizingMask key="autoresizingMask"/>
@@ -757,7 +758,7 @@
         <!--Navigation Controller - Featured-->
         <scene sceneID="P2H-zI-xuW">
             <objects>
-                <navigationController id="fKu-Yw-Y8l" sceneMemberID="viewController">
+                <navigationController id="fKu-Yw-Y8l" customClass="EQBNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Featured" image="FeaturedIcon.png" id="6It-Yh-zpZ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1l7-qp-d1j">
@@ -776,7 +777,7 @@
         <!--Navigation Controller - Playlists-->
         <scene sceneID="GEl-fx-DUv">
             <objects>
-                <navigationController id="evA-8Q-z3F" sceneMemberID="viewController">
+                <navigationController id="evA-8Q-z3F" customClass="EQBNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Playlists" image="PlaylistIcon.png" id="vmk-DW-Pax"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3Tk-nx-TrG">
@@ -795,7 +796,7 @@
         <!--Navigation Controller - Search-->
         <scene sceneID="UTf-Ek-Rur">
             <objects>
-                <navigationController id="8yb-G4-MZA" sceneMemberID="viewController">
+                <navigationController id="8yb-G4-MZA" customClass="EQBNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Search" image="SearchIcon.png" id="81T-wP-B5a"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="a1m-Hg-Keb">
@@ -828,9 +829,16 @@
         <image name="WhiteDisclosure@2x.png" width="20" height="28"/>
     </resources>
     <classes>
+        <class className="EQBNavigationController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/EQBNavigationController.h"/>
+            <relationships>
+                <relationship kind="action" name="viewDidLoad"/>
+            </relationships>
+        </class>
         <class className="FeaturedViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FeaturedViewController.h"/>
             <relationships>
+                <relationship kind="action" name="load_tracks:"/>
                 <relationship kind="action" name="numberOfSectionsInTableView:"/>
                 <relationship kind="action" name="refreshControlChanged:"/>
                 <relationship kind="action" name="reloadData"/>
@@ -841,6 +849,23 @@
                 <relationship kind="action" name="viewDidLoad"/>
                 <relationship kind="action" name="viewWillAppear:"/>
                 <relationship kind="outlet" name="segmentedControl" candidateClass="UISegmentedControl"/>
+            </relationships>
+        </class>
+        <class className="LaunchBackgroundView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LaunchBackgroundView.h"/>
+            <relationships>
+                <relationship kind="action" name="animation_offset"/>
+                <relationship kind="action" name="cell_size"/>
+                <relationship kind="action" name="column_size"/>
+                <relationship kind="action" name="didMoveToWindow"/>
+                <relationship kind="action" name="layoutSubviews"/>
+                <relationship kind="action" name="move_columns"/>
+                <relationship kind="action" name="offscreen_cols"/>
+                <relationship kind="action" name="offscreen_rows"/>
+                <relationship kind="action" name="rotate_columns"/>
+                <relationship kind="action" name="start_animating"/>
+                <relationship kind="action" name="stop_animating"/>
+                <relationship kind="action" name="willMoveToWindow:"/>
             </relationships>
         </class>
         <class className="LaunchViewController" superclassName="UIViewController">
@@ -944,8 +969,33 @@
                 <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
+        <class className="UIImageView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIImageView.h"/>
+            <relationships>
+                <relationship kind="action" name="cancel_current_image_load"/>
+            </relationships>
+        </class>
         <class className="UIRefreshControl" superclassName="UIControl">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UIRefreshControl.h"/>
+        </class>
+        <class className="UISearchBar">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UISearchBar.h"/>
+            <relationships>
+                <relationship kind="action" name="text_field"/>
+            </relationships>
+        </class>
+        <class className="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIView.h"/>
+            <relationships>
+                <relationship kind="action" name="handle_gesture:"/>
+                <relationship kind="action" name="subview_tree"/>
+            </relationships>
+        </class>
+        <class className="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="content_frame"/>
+            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

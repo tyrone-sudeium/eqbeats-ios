@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 $:.unshift("/Library/RubyMotion/lib")
-require 'motion/project'
+require 'motion/project/template/ios'
 
 # require 'bundler'
 # Bundler.require
@@ -29,7 +29,7 @@ Motion::Project::App.setup do |app|
   app.device_family = [:iphone, :ipad]
   app.deployment_target = '6.0'
   app.prerendered_icon = true
-  app.info_plist['CFBundleDisplayName'] = 'eqbeats'
+  app.info_plist['CFBundleDisplayName'] = 'EqBeats'
   app.pods do
     #pod 'BlocksKit'
     pod 'RestKit', '~>0.10.3'
