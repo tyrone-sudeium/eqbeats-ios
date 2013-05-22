@@ -34,13 +34,9 @@ class AppDelegate
     UINavigationBar.appearance.tintColor = BW.rgb_color(23, 15, 52)
     UITabBar.appearance.setBackgroundImage(UIImage.imageNamed('TabBarBackground.png'))
     UITabBar.appearance.setSelectionIndicatorImage(nil)
-    backBtnImage = UIImage.imageNamed('NavigationBackButtonNormal.png')
-    backBtnImage = backBtnImage.resizableImageWithCapInsets([0,14,0,6])
-    backBtnImageHighlighted = UIImage.imageNamed('NavigationBackButtonHighlighted.png')
-    backBtnImageHighlighted = backBtnImageHighlighted.resizableImageWithCapInsets([0,14,0,6])
 
-    UIBarButtonItem.appearance.setBackButtonBackgroundImage(backBtnImage, forState: UIControlStateNormal, barMetrics: UIBarMetricsDefault)
-    UIBarButtonItem.appearance.setBackButtonBackgroundImage(backBtnImageHighlighted, forState: UIControlStateHighlighted, barMetrics: UIBarMetricsDefault)
+    UIBarButtonItem.appearance.setBackButtonBackgroundImage(Theme.back_button_image, forState: UIControlStateNormal, barMetrics: UIBarMetricsDefault)
+    UIBarButtonItem.appearance.setBackButtonBackgroundImage(Theme.back_button_image_highlighted, forState: UIControlStateHighlighted, barMetrics: UIBarMetricsDefault)
     
   end
 end

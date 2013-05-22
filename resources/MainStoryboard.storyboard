@@ -298,6 +298,7 @@
                         <outlet property="fake_volume_slider" destination="3jD-5Z-EKe" id="oDB-vR-neU"/>
                         <outlet property="forward_button" destination="KVt-86-viv" id="RKU-rl-w0M"/>
                         <outlet property="name_label" destination="9sl-q1-ccf" id="pc9-c5-NW9"/>
+                        <outlet property="navigationBar" destination="6NT-PN-hDb" id="7yY-7x-SAg"/>
                         <outlet property="play_pause_button" destination="guq-Ox-92F" id="YUp-e2-60D"/>
                         <outlet property="queue_length_label" destination="mZ3-xh-hMp" id="PYC-H7-YiT"/>
                         <outlet property="remaining_label" destination="R7Z-GP-ZVF" id="2D5-vc-y3d"/>
@@ -919,6 +920,7 @@
                 <relationship kind="outlet" name="fake_volume_slider" candidateClass="UISlider"/>
                 <relationship kind="outlet" name="forward_button" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="name_label" candidateClass="MarqueeLabel"/>
+                <relationship kind="outlet" name="navigationBar" candidateClass="UINavigationBar"/>
                 <relationship kind="outlet" name="play_pause_button" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="queue_length_label" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="remaining_label" candidateClass="UILabel"/>

@@ -15,11 +15,13 @@ class PlayerViewController < UIViewController
   outlet :back_button_item, UIBarButtonItem
   outlet :volume_view, MPVolumeView
   outlet :fake_volume_slider, UISlider
+  outlet :navigationBar, UINavigationBar
 
   def viewDidLoad
     super
-    self.back_button_item.setBackgroundImage(Theme.black_back_button_image, forState:UIControlStateNormal, barMetrics:UIBarMetricsDefault)
-    self.back_button_item.setBackgroundImage(Theme.black_back_button_highlighted_image, forState:UIControlStateHighlighted, barMetrics:UIBarMetricsDefault)
+    self.navigationBar.setBackgroundImage(UIImage.imageNamed('NavigationBarBackground.png'), forBarMetrics: UIBarMetricsDefault)
+    self.back_button_item.setBackgroundImage(Theme.back_button_image, forState:UIControlStateNormal, barMetrics:UIBarMetricsDefault)
+    self.back_button_item.setBackgroundImage(Theme.back_button_image_highlighted, forState:UIControlStateHighlighted, barMetrics:UIBarMetricsDefault)
 
     if Device.simulator?
       self.fake_volume_slider.hidden = false

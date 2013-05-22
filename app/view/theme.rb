@@ -46,6 +46,24 @@ module EQBeats::Theme
     UIImage.imageNamed('Pause.png')
   end
 
+  def back_button_image
+    backBtnImage = UIImage.imageNamed('NavigationBackButtonNormal.png')
+    backBtnImage = backBtnImage.resizableImageWithCapInsets([0,14,0,6])
+  end
+
+  def back_button_image_highlighted
+    backBtnImageHighlighted = UIImage.imageNamed('NavigationBackButtonHighlighted.png')
+    backBtnImageHighlighted = backBtnImageHighlighted.resizableImageWithCapInsets([0,14,0,6])
+  end
+
+  def tab_bar_play_button_image
+    UIImage.imageNamed('TabBarPlayButton.png')
+  end
+
+  def tab_bar_pause_button_image
+    UIImage.imageNamed('TabBarPauseButton.png')
+  end
+
 end
 
 ::Theme = ::EQBeats::Theme unless defined?(::Theme)
