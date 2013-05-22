@@ -63,7 +63,7 @@ module EQBeats::AudioPlayer
     end
 
     observe(@player, 'rate') do |old_item, new_item|
-      p 'rate changed'
+      p "rate changed old: #{old_item} new #{new_item}"
       update_playback_state
     end
     update_observer_timers
@@ -249,8 +249,13 @@ module EQBeats::AudioPlayer
     observe(new_item, 'status') do |old_status, new_status|
       p 'status changed'
       update_playback_state
-      if new_status == AVPlayerStatusReadyToPlay
+      case new_status
+      when AVPlayerStatusReadyToPlay
         update_observer_timers
+      when AVPlayerStatusFailed
+        if has_next_item?
+          next_track
+        end
       end
     end
     self.observers.each do |obs|

@@ -49,7 +49,7 @@ class FeaturedViewController < UITableViewController
   end
 
   def tracks_for_queue_at_index_path(indexPath)
-    tracks[indexPath.section]
+    tracks
   end
 
   # Table View Delegate

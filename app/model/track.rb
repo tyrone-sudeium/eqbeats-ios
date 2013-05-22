@@ -11,7 +11,7 @@ class Track < EQBeats::ModelObject
   end
 
   def mp4
-    self.download[:aac]
+    "#{self.download[:aac]}"
   end
 
   # quality, :thumb, :medium, :full

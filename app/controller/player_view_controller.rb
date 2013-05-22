@@ -144,11 +144,19 @@ class PlayerViewController < UIViewController
       end
     end
 
-    if AudioPlayer.playing? or AudioPlayer.autoplay
+    if shows_pause_icon?
       self.play_pause_button.setImage(Theme.pause_button_image, forState:UIControlStateNormal)
     else
       self.play_pause_button.setImage(Theme.play_button_image, forState:UIControlStateNormal)
     end
+  end
+
+  def shows_play_icon?
+    !shows_pause_icon?
+  end
+
+  def shows_pause_icon?
+    return true if AudioPlayer.playing? || AudioPlayer.autoplay
   end
 
   def update_album_art

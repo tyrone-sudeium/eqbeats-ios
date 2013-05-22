@@ -11,7 +11,8 @@ class EQBeats::AudioPlayerObserver
 
   def remove_all_events
     EVENTS.each do |event|
-      @events.delete event
+      # dealwithit.gif
+      @__events__.delete event
     end
     remove_timer
   end
