@@ -16,5 +16,7 @@ ib.xcodeproj
 vendor/Pods
 .dat*.*
 .idea
+testflight_setup.rb
+app/testflight_launcher.rb
 
 /scripts/artwork/

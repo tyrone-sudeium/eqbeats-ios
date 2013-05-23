@@ -88,6 +88,10 @@ module EQBeats::AudioPlayer
     @observers ||= []
   end
 
+  def update_observers
+    update_observer_timers
+  end
+
   def toggle_play_pause
     if playing? or self.autoplay
       self.autoplay = false
@@ -203,7 +207,7 @@ module EQBeats::AudioPlayer
   def update_observer_timers
     self.observers.each do |obs|
       obs.remove_timer
-      unless obs.timing_interval.nil? or obs.timing_interval <= 0
+      unless obs.timing_interval.nil? || obs.timing_interval <= 0 || @player.nil?
         obs.player = @player
         obs.timer = @player.addPeriodicTimeObserverForInterval(CMTimeMakeWithSeconds(obs.timing_interval, NSEC_PER_SEC), 
           queue:nil, 

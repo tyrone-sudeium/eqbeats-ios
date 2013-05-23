@@ -887,10 +887,14 @@
                 <relationship kind="action" name="toPlaybackControlsAction:"/>
                 <relationship kind="action" name="toTabBarControlsAction:"/>
                 <relationship kind="action" name="updateButtonSelectionState"/>
+                <relationship kind="action" name="updatePlaybackButtons"/>
                 <relationship kind="action" name="updatePlayingItem"/>
                 <relationship kind="action" name="viewDidLoad"/>
                 <relationship kind="action" name="viewWillAppear:"/>
                 <relationship kind="action" name="viewWillDisappear:"/>
+                <relationship kind="outlet" name="forward_button" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="play_pause_button" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="rewind_button" candidateClass="UIButton"/>
                 <relationship kind="outletCollection" name="buttons" candidateClass="UIButton"/>
             </relationships>
         </class>

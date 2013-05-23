@@ -33,7 +33,7 @@ class EQBeatsTabBarView < UIView
   def songText=(text)
     maxSize = [Float::MAX, songLabel.frame.size.height]
     desiredSize = text.sizeWithFont(songLabel.font, constrainedToSize:maxSize, lineBreakMode:songLabel.lineBreakMode)
-    if desiredSize.width+5 >= songLabel.frame.size.width
+    if desiredSize.width >= (songLabel.frame.size.width - 20)
       songLabel.marqueeType = MLContinuous
       songLabel.textAlignment = UITextAlignmentCenter
     else

@@ -32,23 +32,19 @@ class PlayerViewController < UIViewController
     super
 
     self.observer.on :elapsed_time_changed { update_slider; update_labels }
+
     self.observer.on :playback_state_changed do
       p "playback_state: #{AudioPlayer.playback_state}"
-      if self.observer.timing_interval.nil?
-        duration = AudioPlayer.duration
-        unless duration.nil? or !duration.valid? or duration.infinity?
-          seconds = CMTimeGetSeconds(duration)
-          self.observer.timing_interval = 1
-        end
-      end
-
       update_buttons
     end
+
     self.observer.on :current_item_changed do
       update_everything
     end
+    self.observer.timing_interval = 1
 
     update_everything
+    AudioPlayer.update_observers
   end
 
   def viewWillDisappear(animated)
@@ -56,6 +52,7 @@ class PlayerViewController < UIViewController
     p self.observer.description
     self.observer.remove_all_events
     AudioPlayer.observers.delete self.observer
+    AudioPlayer.update_observers
   end
 
   def viewDidAppear(animated)

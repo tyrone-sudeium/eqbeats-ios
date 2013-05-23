@@ -19,6 +19,13 @@ class MainTabBarController < UITabBarController
     self.tabBar.addSubview(self.customTabBarView)
     self.tabBar.bringSubviewToFront(self.customTabBarView)
     self.moreNavigationController.navigationBar.setBackgroundImage(UIImage.imageNamed('NavigationBarBackground.png'), forBarMetrics: UIBarMetricsDefault)
+
+    self.customTabBarView.songArtView.when_tapped do
+      unless AudioPlayer.current_item.nil?
+        player = self.storyboard.instantiateViewControllerWithIdentifier('NowPlaying')
+        App.delegate.navigation_controller.pushViewController(player, animated:true)
+      end
+    end
   end
 
   def viewWillAppear(animated)
