@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'libeqbeats' target in the 'libeqbeats' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+#endif

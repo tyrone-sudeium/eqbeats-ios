@@ -20,3 +20,10 @@ testflight_setup.rb
 app/testflight_launcher.rb
 
 /scripts/artwork/
+*~.nib
+build/
+.xcodeproj/ !*.xcodeproj/project.pbxproj
+*.xcuserdatad
+xcuserdatad
+.build/
+build-*/

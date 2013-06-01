@@ -2,8 +2,8 @@
 $:.unshift("/Library/RubyMotion/lib")
 require 'motion/project/template/ios'
 
-# require 'bundler'
-# Bundler.require
+require 'bundler'
+Bundler.require
 require 'bubble-wrap'
 require 'bubble-wrap/reactor'
 # require 'sugarcube'
@@ -38,10 +38,13 @@ Motion::Project::App.setup do |app|
     pod 'MarqueeLabel', :podspec => 'scripts/podspec/MarqueeLabel.podspec'
     pod 'TestFlightSDK'
   end
+  app.vendor_project('vendor/libeqbeats', :xcode)
   app.background_modes = [:audio]
 
   app.development do
     app.entitlements['get-task-allow'] = true
+    app.unvendor_project('vendor/libeqbeats')
+    app.vendor_project('vendor/libeqbeats', :xcode, configuration: 'debug')
   end
 
   app.provisioning_profile = 'data/EqBeats_AdHoc_TestFlight.mobileprovision'
@@ -55,3 +58,9 @@ namespace 'eqbeats' do
 end
 
 task 'testflight:submit' => 'eqbeats:setup_testflight'
+
+task :vendor_clean_run do
+  Motion::Project::App.config.vendor_projects.each { |vendor| vendor.clean }
+  ENV['retina'] = '4'
+  Rake::Task["simulator"].invoke
+end

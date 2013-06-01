@@ -51,6 +51,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <view contentMode="scaleToFill" id="qe7-6E-aG1" customClass="RoundProgressControl">
+                                <rect key="frame" x="140" y="254" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                             <view opaque="NO" contentMode="scaleToFill" id="Pnl-Ic-Xh0">
                                 <rect key="frame" x="0.0" y="504" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -105,6 +110,7 @@
                     <navigationItem key="navigationItem" id="eFJ-5f-lN7"/>
                     <connections>
                         <outlet property="launch_background" destination="enQ-4e-Ww3" id="nQx-aR-aP9"/>
+                        <outlet property="progress_control" destination="qe7-6E-aG1" id="1di-2e-WI5"/>
                         <segue destination="9vX-U1-fWx" kind="push" identifier="PushToTabBarController" id="8gj-DJ-rmR"/>
                     </connections>
                 </viewController>
@@ -875,6 +881,7 @@
                 <relationship kind="action" name="viewDidLoad"/>
                 <relationship kind="action" name="viewWillAppear:"/>
                 <relationship kind="outlet" name="launch_background" candidateClass="LaunchBackgroundView"/>
+                <relationship kind="outlet" name="progress_control" candidateClass="RoundProgressControl"/>
             </relationships>
         </class>
         <class className="MainTabBarController" superclassName="UITabBarController">
@@ -949,6 +956,12 @@
                 <relationship kind="action" name="stationForRow:"/>
             </relationships>
         </class>
+        <class className="RoundProgressControl" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RoundProgressControl.h"/>
+            <relationships>
+                <relationship kind="action" name="progress"/>
+            </relationships>
+        </class>
         <class className="SearchViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SearchViewController.h"/>
             <relationships>
@@ -980,9 +993,6 @@
             <relationships>
                 <relationship kind="action" name="cancel_current_image_load"/>
             </relationships>
-        </class>
-        <class className="UIRefreshControl" superclassName="UIControl">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIRefreshControl.h"/>
         </class>
         <class className="UISearchBar">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UISearchBar.h"/>
