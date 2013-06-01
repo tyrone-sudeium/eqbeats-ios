@@ -12,11 +12,13 @@
 @implementation RoundProgressControlLayer
 @dynamic progress;
 
+static UIColor *kOutlineColor = nil;
 static UIColor *kUnfinishedColor = nil;
 static UIColor *kFinishedColor = nil;
 
 + (void) initialize
 {
+    kOutlineColor = [UIColor colorWithRed: 68.0/255.0 green: 22.0/255.0 blue: 94.0/255.0 alpha: 1];
     kUnfinishedColor = [UIColor colorWithRed: 184.0/255.0 green:52.0/255.0 blue:139.0/255.0 alpha:1];
     kFinishedColor = [UIColor colorWithRed: 65.0/255.0 green:52.0/255.0 blue:184.0/255.0 alpha:1];
 }
@@ -69,6 +71,10 @@ static UIColor *kFinishedColor = nil;
     path = nil;
     CGContextSetFillColorWithColor(ctx, kFinishedColor.CGColor);
     CGContextFillPath(ctx);
+    
+    CGContextSetStrokeColorWithColor(ctx, kOutlineColor.CGColor);
+    CGContextSetLineWidth(ctx, 2.0);
+    CGContextStrokeEllipseInRect(ctx, CGRectInset(rect, 1, 1));
 }
 
 - (void) drawStopInContext: (CGContextRef) ctx

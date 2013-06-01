@@ -51,10 +51,10 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <view contentMode="scaleToFill" id="qe7-6E-aG1" customClass="RoundProgressControl">
+                            <view opaque="NO" contentMode="scaleToFill" id="qe7-6E-aG1" customClass="RoundProgressControl">
                                 <rect key="frame" x="140" y="254" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view opaque="NO" contentMode="scaleToFill" id="Pnl-Ic-Xh0">
                                 <rect key="frame" x="0.0" y="504" width="320" height="44"/>
@@ -993,6 +993,9 @@
             <relationships>
                 <relationship kind="action" name="cancel_current_image_load"/>
             </relationships>
+        </class>
+        <class className="UIRefreshControl" superclassName="UIControl">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIRefreshControl.h"/>
         </class>
         <class className="UISearchBar">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UISearchBar.h"/>
