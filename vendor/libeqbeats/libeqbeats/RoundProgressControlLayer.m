@@ -7,7 +7,6 @@
 //
 
 #import "RoundProgressControlLayer.h"
-#import "motion_headers.h"
 
 @implementation RoundProgressControlLayer
 @dynamic progress;
@@ -26,7 +25,6 @@ static UIColor *kFinishedColor = nil;
 + (BOOL) needsDisplayForKey:(NSString *)key
 {
     if ([key isEqualToString: @"progress"]) {
-        NSLog(@"!");
         return YES;
     } else {
         return [super needsDisplayForKey: key];

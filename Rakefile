@@ -6,7 +6,6 @@ require 'bundler'
 Bundler.require
 require 'bubble-wrap'
 require 'bubble-wrap/reactor'
-# require 'sugarcube'
 require 'ib'
 require 'motion-cocoapods'
 require 'motion-testflight'
@@ -32,7 +31,6 @@ Motion::Project::App.setup do |app|
   app.prerendered_icon = true
   app.info_plist['CFBundleDisplayName'] = 'EqBeats'
   app.pods do
-    #pod 'BlocksKit'
     pod 'RestKit', '~>0.10.3'
     pod 'SDWebImage', '>= 3.0'
     pod 'MarqueeLabel', :podspec => 'scripts/podspec/MarqueeLabel.podspec'

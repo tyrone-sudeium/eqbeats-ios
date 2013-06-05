@@ -2,7 +2,6 @@ class LaunchViewController < UIViewController
   extend IB
 
   outlet :launch_background, LaunchBackgroundView
-  outlet :progress_control, RoundProgressControl
 
   def viewDidLoad
     self.view.when_tapped do

@@ -2,10 +2,17 @@
 class RoundProgressControlLayer < CALayer
   UNFINISHED_COLOR = '#88348B'.to_color
   FINISHED_COLOR = '#4134B8'.to_color
+  OUTLINE_COLOR = '#44165E'.to_color
 
   # Normalized progress between 0.0 and 1.0.  Values above and below this
   # will result in undefined behaviour.
-  # attr_accessor :progress
+  attr_accessor :progress
+
+  def init
+    super
+    self.progress = 0
+    self
+  end
 
   def self.needsDisplayForKey(key)
     if key == 'progress'
@@ -37,26 +44,25 @@ class RoundProgressControlLayer < CALayer
   def drawArcsInContext(context)
     rect = self.bounds
     progress = self.workingLayer.valueForKey('progress')
-    angle = (progress * Math::PI * 2) - Math::PI
+    angle = (progress * Math::PI * 2) - (Math::PI / 2.0)
 
-    UIGraphicsPushContext(context)
+    CGContextSetFillColorWithColor(context, UNFINISHED_COLOR.CGColor)
+    CGContextFillEllipseInRect(context, rect)
+    
+    center = CGPointMake(CGRectGetMidX(rect), CGRectGetMidY(rect))
+    path = CGPathCreateMutable()
+    CGPathMoveToPoint(path, nil, center.x, center.y)
+    CGPathAddArc(path, nil, center.x, center.y, rect.size.width / 2.0, -Math::PI/2, angle, false)
+    CGPathAddLineToPoint(path, nil, center.x, center.y)
+    CGPathCloseSubpath(path)
+    CGContextAddPath(context, path)
 
-    unfinished_path = UIBezierPath.bezierPathWithOvalInRect(rect)
-    UNFINISHED_COLOR.set
-    unfinished_path.fill
-
-    finished_path = UIBezierPath.new
-    finished_path.moveToPoint(rect.center)
-    finished_path.addLineToPoint(rect.top_center)
-    finished_path.addArcWithCenter(rect.center,
-                                   radius: rect.width,
-                                   startAngle: -Math::PI / 2,
-                                   endAngle: angle,
-                                   clockwise: true)
-    FINISHED_COLOR.set
-    finished_path.fill
-
-    UIGraphicsPopContext()
+    CGContextSetFillColorWithColor(context, FINISHED_COLOR.CGColor)
+    CGContextFillPath(context)
+    
+    CGContextSetStrokeColorWithColor(context, OUTLINE_COLOR.CGColor)
+    CGContextSetLineWidth(context, 2.0)
+    CGContextStrokeEllipseInRect(context, rect.shrink([1,1]))
   end
 
   def drawStopInContext(context)

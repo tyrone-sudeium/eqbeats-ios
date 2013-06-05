@@ -51,11 +51,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <view opaque="NO" contentMode="scaleToFill" id="qe7-6E-aG1" customClass="RoundProgressControl">
-                                <rect key="frame" x="140" y="254" width="40" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
                             <view opaque="NO" contentMode="scaleToFill" id="Pnl-Ic-Xh0">
                                 <rect key="frame" x="0.0" y="504" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -110,7 +105,6 @@
                     <navigationItem key="navigationItem" id="eFJ-5f-lN7"/>
                     <connections>
                         <outlet property="launch_background" destination="enQ-4e-Ww3" id="nQx-aR-aP9"/>
-                        <outlet property="progress_control" destination="qe7-6E-aG1" id="1di-2e-WI5"/>
                         <segue destination="9vX-U1-fWx" kind="push" identifier="PushToTabBarController" id="8gj-DJ-rmR"/>
                     </connections>
                 </viewController>
@@ -756,11 +750,118 @@
                             <outlet property="delegate" destination="lkO-QZ-Tl5" id="IuB-fM-Yjl"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Playlists" id="CFc-EH-Rvw"/>
+                    <navigationItem key="navigationItem" title="Playlists" id="CFc-EH-Rvw">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="cOX-vr-3Vm">
+                            <connections>
+                                <segue destination="gol-Fy-Yia" kind="push" id="YMg-hH-0bp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YSM-mn-YHQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1514" y="70"/>
+        </scene>
+        <!--Playlist View Controller-->
+        <scene sceneID="Er5-sl-6ZB">
+            <objects>
+                <viewController id="gol-Fy-Yia" customClass="PlaylistViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="eLq-OP-646">
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PlaylistOptionsCell" id="HrQ-J1-wpa" customClass="PlaylistOptionsCell">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4AT-po-0Ax">
+                                            <rect key="frame" x="8" y="8" width="95" height="29"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                            <state key="normal" title="Edit">
+                                                <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="highlighted">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9kh-3o-awN">
+                                            <rect key="frame" x="113" y="8" width="94" height="29"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                            <state key="normal" title="Clear">
+                                                <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="highlighted">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="rHS-gn-UuF">
+                                            <rect key="frame" x="217" y="8" width="95" height="29"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                            <state key="normal" title="Delete">
+                                                <color key="titleColor" red="0.1960784314" green="0.30980392159999998" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <state key="highlighted">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <outlet property="clearButton" destination="9kh-3o-awN" id="Un4-Jl-8yl"/>
+                                    <outlet property="deleteButton" destination="rHS-gn-UuF" id="xAd-CN-L1a"/>
+                                    <outlet property="editButton" destination="4AT-po-0Ax" id="S42-sG-Bwb"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="gol-Fy-Yia" id="XUi-eK-EuL"/>
+                            <outlet property="delegate" destination="gol-Fy-Yia" id="RZ2-vo-Wax"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Hey-cC-HQn">
+                        <nil key="title"/>
+                        <view key="titleView" opaque="NO" contentMode="scaleToFill" id="y1z-8D-ghw">
+                            <rect key="frame" x="80" y="6" width="160" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="New Playlist" placeholder="Playlist Name" textAlignment="center" minimumFontSize="18" id="jzy-Ur-n4i" customClass="ShadowedTextField">
+                                    <rect key="frame" x="0.0" y="0.0" width="160" height="33"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                            <color key="value" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                            <size key="value" width="0.0" height="-1"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </textField>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="titleTextField" destination="jzy-Ur-n4i" id="eDS-r6-sih"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1dY-hG-4Ub" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2048" y="-601"/>
         </scene>
         <!--Navigation Controller - Featured-->
         <scene sceneID="P2H-zI-xuW">
@@ -940,6 +1041,21 @@
                 <relationship kind="outlet" name="volume_view" candidateClass="MPVolumeView"/>
             </relationships>
         </class>
+        <class className="PlaylistOptionsCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlaylistOptionsCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="clearButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="editButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="PlaylistViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PlaylistViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="viewDidLoad"/>
+                <relationship kind="outlet" name="titleTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
         <class className="PlaylistsViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PlaylistsViewController.h"/>
         </class>
@@ -956,9 +1072,11 @@
                 <relationship kind="action" name="stationForRow:"/>
             </relationships>
         </class>
-        <class className="RoundProgressControl" superclassName="UIView">
+        <class className="RoundProgressControl" superclassName="UIControl">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RoundProgressControl.h"/>
             <relationships>
+                <relationship kind="action" name="awakeFromNib"/>
+                <relationship kind="action" name="didMoveToSuperview"/>
                 <relationship kind="action" name="progress"/>
             </relationships>
         </class>
@@ -978,6 +1096,12 @@
                 <relationship kind="action" name="viewDidAppear:"/>
                 <relationship kind="action" name="viewDidLoad"/>
                 <relationship kind="action" name="viewWillAppear:"/>
+            </relationships>
+        </class>
+        <class className="ShadowedTextField" superclassName="UITextField">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ShadowedTextField.h"/>
+            <relationships>
+                <relationship kind="action" name="drawTextInRect:"/>
             </relationships>
         </class>
         <class className="TrackCell" superclassName="UITableViewCell">
