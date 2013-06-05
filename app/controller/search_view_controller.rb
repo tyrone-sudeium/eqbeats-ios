@@ -67,19 +67,19 @@ class SearchViewController < UITableViewController
     reloadData
     case searchBar.selectedScopeButtonIndex
     when 0
-      App.delegate.api.search_track "#{searchBar.text}", -> results {
+      App.delegate.api.search_track "#{searchBar.text}" do |results|
         if results.is_a? NSArray
           @search_results = results
           reloadData
         end
-      }
+      end
     when 1
-      App.delegate.api.search_user "#{searchBar.text}", -> results {
+      App.delegate.api.search_user "#{searchBar.text}" do |results|
         if results.is_a? NSArray
           @search_results = results
           reloadData
         end
-      }
+      end
     end
   end
 

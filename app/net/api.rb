@@ -16,12 +16,13 @@ module EQBeats
     end
 
     # Searches for a user based on the provided query.
-    def search_user(query)
+    def search_user(query, &block)
       if not query.nil?
         query = query.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
-        get("#{@base_url}/users/search/json?q=#{query}", user_mapping) do |results|
-          yield results
+        get("#{@base_url}/users/search/json?q=#{query}", user_mapping, -> results do
+          block.call(results)
         end
+        )
       end
     end
 

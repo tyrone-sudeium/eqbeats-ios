@@ -23,6 +23,8 @@ class TestView < UIView
 end
 
 class BackgroundTileImageView < UIImageView
+  include Layout::LayoutView
+  
   def desiredHeight
     self.frame.size.height
   end
